@@ -2,7 +2,7 @@ package com.smartfoxserver.v2.bitswarm;
 
 import com.smartfoxserver.v2.entities.data.ISFSObject;
 
-@:build(JsProp.all())
+#if html5 @:build(JsProp.all()) #end
 class Message #if !html5 implements IMessage #end
 {
 	private var _id:Int;

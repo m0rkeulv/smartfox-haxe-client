@@ -79,6 +79,7 @@ class Logger extends EventDispatcher
 	private var _loggingPrefix:String;
 	
 	/** @private */
+	@:allow(com.smartfoxserver.v2.SmartFox)
 	function new(prefix:String="SFS2X")
 	{
 		super();
@@ -88,7 +89,7 @@ class Logger extends EventDispatcher
 	/**
 	 * Indicates whether or not the output of logged messages to the console window of Adobe Flash and Flex/Flash Builder is enabled.
 	 */
-	public var enableConsoleTrace(get_enableConsoleTrace, set_enableConsoleTrace):Bool;
+	public var enableConsoleTrace(get, set):Bool;
  	private function get_enableConsoleTrace():Bool
 	{
 		return _enableConsoleTrace;
@@ -108,7 +109,7 @@ class Logger extends EventDispatcher
 	 * @see 	#event:warn warn event
 	 * @see 	#event:error error event
 	 */
-	public var enableEventDispatching(get_enableEventDispatching, set_enableEventDispatching):Bool;
+	public var enableEventDispatching(get, set):Bool;
  	private function get_enableEventDispatching():Bool
 	{
 		return _enableEventDispatching;
@@ -127,7 +128,7 @@ class Logger extends EventDispatcher
 	 * 
 	 * @see		LogLevel
 	 */
-	public var loggingLevel(get_loggingLevel, set_loggingLevel):Int;
+	public var loggingLevel(get, set):Int;
  	private function get_loggingLevel():Int
 	{
 		return _loggingLevel;	

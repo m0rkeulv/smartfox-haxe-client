@@ -7,7 +7,7 @@ import com.smartfoxserver.v2.entities.variables.BuddyVariable;
 #if html5
 @:native('SFS2X.SFSBuddyManager')
 extern class SFSBuddyManager{
-	public var buddyList(get_buddyList,null):Array<Buddy>;
+	public var buddyList(get,null):Array<Buddy>;
 	inline function get_buddyList():Array<Buddy>
 	{
 		return getBuddyList();
@@ -22,7 +22,6 @@ extern class SFSBuddyManager{
 	function getMyNickName():String;
 	function getMyOnlineState():Bool;
 	function getMyState():String;
-	function getMyVariable(varName:String):BuddyVariable;
 	function getMyVariables():Array<BuddyVariable>;
 	function getOfflineBuddies():Array<Buddy>;
 	function getOnlineBuddies():Array<Buddy>;
@@ -82,7 +81,7 @@ class SFSBuddyManager implements IBuddyManager
 	}
 	
 	/** @inheritDoc */ 
-	public var isInited(get_isInited, null):Bool;
+	public var isInited(get, null):Bool;
  	private function get_isInited():Bool
 	{
 		return _inited;
@@ -168,7 +167,7 @@ class SFSBuddyManager implements IBuddyManager
 	}
 	
 	/** @inheritDoc */
-	public var offlineBuddies(get_offlineBuddies, null):Array<Buddy>;
+	public var offlineBuddies(get, null):Array<Buddy>;
  	private function get_offlineBuddies():Array<Buddy>
 	{
 		var buddies:Array<Buddy> = [];
@@ -183,7 +182,7 @@ class SFSBuddyManager implements IBuddyManager
 	}
 	
 	/** @inheritDoc */
-	public var onlineBuddies(get_onlineBuddies, null):Array<Buddy>;
+	public var onlineBuddies(get, null):Array<Buddy>;
 	
  	private function get_onlineBuddies():Array<Buddy>
 	{
@@ -199,7 +198,7 @@ class SFSBuddyManager implements IBuddyManager
 	}
 	
 	/** @inheritDoc */
-	public var buddyList(get_buddyList, null):Array<Buddy>;
+	public var buddyList(get, null):Array<Buddy>;
  	private function get_buddyList():Array<Buddy>
 	{
 		return Lambda.array(_buddiesByName);
@@ -212,14 +211,14 @@ class SFSBuddyManager implements IBuddyManager
 	}
 	
 	/** @inheritDoc */
-	public var myVariables(get_myVariables, null):Array<BuddyVariable>;
+	public var myVariables(get, null):Array<BuddyVariable>;
  	private function get_myVariables():Array<BuddyVariable>
 	{
 		return cast ArrayUtil.objToArray(_myVariables);	
 	}
 	
 	/** @inheritDoc */
-	public var myOnlineState(get_myOnlineState, null):Bool;
+	public var myOnlineState(get, null):Bool;
  	private function get_myOnlineState():Bool
 	{
 		// Manager not inited, we're offline
@@ -237,7 +236,7 @@ class SFSBuddyManager implements IBuddyManager
 	}
 	
 	/** @inheritDoc */
-	public var myNickName(get_myNickName, null):String;
+	public var myNickName(get, null):String;
  	private function get_myNickName():String
 	{
 		var nickNameVar:BuddyVariable = getMyVariable(ReservedBuddyVariables.BV_NICKNAME);
@@ -245,7 +244,7 @@ class SFSBuddyManager implements IBuddyManager
 	}
 	
 	/** @inheritDoc */
-	public var myState(get_myState, null):String;
+	public var myState(get, null):String;
  	private function get_myState():String
 	{
 		var stateVar:BuddyVariable = getMyVariable(ReservedBuddyVariables.BV_STATE);
@@ -253,7 +252,7 @@ class SFSBuddyManager implements IBuddyManager
 	}
 	
 	/** @inheritDoc */
-	public var buddyStates(get_buddyStates, null):Array<String>;
+	public var buddyStates(get, null):Array<String>;
  	private function get_buddyStates():Array<String>
 	{
 		return _buddyStates;
