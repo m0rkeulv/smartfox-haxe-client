@@ -1,7 +1,7 @@
 package com.smartfoxserver.v2.requests;
 
-import flash.system.Capabilities;
-import flash.system.System;
+import openfl.system.Capabilities;
+import openfl.system.System;
 
 /**
  * @private

@@ -2,11 +2,11 @@ package com.smartfoxserver.v2.util;
 
 import com.smartfoxserver.v2.core.SFSEvent;
 
-import flash.events.Event;
-import flash.events.EventDispatcher;
-import flash.events.IOErrorEvent;
-import flash.net.URLLoader;
-import flash.net.URLRequest;
+import openfl.events.Event;
+import openfl.events.EventDispatcher;
+import openfl.events.IOErrorEvent;
+import openfl.net.URLLoader;
+import openfl.net.URLRequest;
 
 /**
  * @private
@@ -30,7 +30,7 @@ class ConfigLoader extends EventDispatcher
 	{
 		var loader:URLLoader = cast evt.target;
 		var xmlDoc:Xml = Xml.parse(loader.data);
-		var fastDoc:haxe.xml.Fast = new haxe.xml.Fast(xmlDoc);
+		var fastDoc:haxe.xml.Access = new haxe.xml.Access(xmlDoc);
 		var cfgData:ConfigData = new ConfigData();
 		
 		cfgData.host = fastDoc.att.ip;

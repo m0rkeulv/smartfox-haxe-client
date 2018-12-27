@@ -3,7 +3,7 @@ package com.smartfoxserver.v2.bitswarm;
 import com.smartfoxserver.v2.SmartFox;
 import com.smartfoxserver.v2.core.SFSEvent;
 
-import flash.utils.ByteArray;
+import openfl.utils.ByteArray;
 
 /** @private */
 interface IUDPManager

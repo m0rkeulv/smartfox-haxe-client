@@ -1,11 +1,6 @@
 package com.smartfoxserver.v2.entities.variables;
 import com.smartfoxserver.v2.entities.data.ISFSArray;
-#if html5
-@:native('SFS2X.MMOItemVariable')
-extern class MMOItemVariable extends SFSUserVariable{
 
-}
-#else
 
 
 /**
@@ -49,4 +44,3 @@ class MMOItemVariable extends SFSUserVariable implements IMMOItemVariable
 		return "[ItemVar:" + _name + ", type:" + _type + ", value:" + _value + "]";
 	}
 }
-#end

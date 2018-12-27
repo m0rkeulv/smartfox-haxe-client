@@ -2,17 +2,17 @@ package com.smartfoxserver.v2.bitswarm.bbox;
 
 //import com.hurlant.util.Base64;
 
-import flash.errors.IllegalOperationError;
-import flash.events.Event;
-import flash.events.EventDispatcher;
-import flash.events.IOErrorEvent;
-import flash.events.SecurityErrorEvent;
-import flash.net.URLLoader;
-import flash.net.URLLoaderDataFormat;
-import flash.net.URLRequest;
-import flash.net.URLRequestMethod;
-import flash.net.URLVariables;
-import flash.utils.ByteArray;
+import openfl.errors.IllegalOperationError;
+import openfl.events.Event;
+import openfl.events.EventDispatcher;
+import openfl.events.IOErrorEvent;
+import openfl.events.SecurityErrorEvent;
+import openfl.net.URLLoader;
+import openfl.net.URLLoaderDataFormat;
+import openfl.net.URLRequest;
+import openfl.net.URLRequestMethod;
+import openfl.net.URLVariables;
+import openfl.utils.ByteArray;
 import haxe.crypto.Base64;
 import haxe.Timer;
 

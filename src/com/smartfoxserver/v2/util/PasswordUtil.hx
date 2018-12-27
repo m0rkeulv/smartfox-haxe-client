@@ -4,7 +4,7 @@ import com.hurlant.crypto.hash.IHash;
 import com.hurlant.crypto.hash.MD5;
 import com.hurlant.util.Hex;
 
-import flash.utils.ByteArray<Dynamic>;
+import openfl.utils.ByteArray<Dynamic>;
 
 /**
  * Helper class for logging in with a pre-hashed password.

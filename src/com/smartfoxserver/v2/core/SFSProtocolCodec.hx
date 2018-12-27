@@ -12,7 +12,7 @@ import com.smartfoxserver.v2.exceptions.SFSError;
 import com.smartfoxserver.v2.logging.Logger;
 import com.smartfoxserver.v2.protocol.IProtocolCodec;
 
-import flash.utils.ByteArray;
+import openfl.utils.ByteArray;
 
 /** @private */
 class SFSProtocolCodec implements IProtocolCodec

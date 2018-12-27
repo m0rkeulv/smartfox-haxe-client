@@ -1,12 +1,7 @@
 package com.smartfoxserver.v2.requests;
 import com.smartfoxserver.v2.entities.Room;
 import com.smartfoxserver.v2.entities.variables.RoomVariable;
-#if html5
-@:native('SFS2X.SetRoomVariablesRequest')
-extern class SetRoomVariablesRequest{
-	function new(roomVariables:Array<RoomVariable>, room:Room=null);
-}
-#else
+
 import com.smartfoxserver.v2.SmartFox;
 import com.smartfoxserver.v2.entities.data.ISFSArray;
 import com.smartfoxserver.v2.entities.data.SFSArray;
@@ -125,4 +120,3 @@ class SetRoomVariablesRequest extends BaseRequest
 		_sfso.putInt(KEY_VAR_ROOM, _room.id);
 	}
 }
-#end

@@ -1,6 +1,6 @@
 package com.smartfoxserver.v2.logging;
 
-import flash.events.EventDispatcher;
+import openfl.events.EventDispatcher;
 
 //--------------------------------------
 //  Events

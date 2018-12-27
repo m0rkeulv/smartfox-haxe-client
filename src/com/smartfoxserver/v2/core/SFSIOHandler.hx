@@ -14,8 +14,8 @@ import com.smartfoxserver.v2.protocol.serialization.DefaultObjectDumpFormatter;
 import com.smartfoxserver.v2.protocol.serialization.DefaultSFSDataSerializer;
 import openfl.utils.Endian;
 
-import flash.errors.IOError;
-import flash.utils.ByteArray;
+import openfl.errors.IOError;
+import openfl.utils.ByteArray;
 
 /** @private */
 class SFSIOHandler implements IoHandler

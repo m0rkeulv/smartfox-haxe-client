@@ -1,22 +1,7 @@
 package com.smartfoxserver.v2.protocol.serialization;
 
-import flash.utils.ByteArray;
-/*
-#if html5
-@native(_DataSerializer.SFSDataSerializer)
-extern class DefaultSFSDataSerializer
-{
-	static var instance:DefaultSFSDataSerializer;
+import openfl.utils.ByteArray;
 
-	inline static function getInstance():DefaultSFSDataSerializer
-	{
-		return instance;
-	}
-	function object2binary(o:Dynamic):ByteArray;
-	function binary2object(b:ByteArray):Dynamic;
-}
-#else
-**/
 import com.smartfoxserver.v2.entities.data.ISFSArray;
 import com.smartfoxserver.v2.entities.data.ISFSObject;
 import com.smartfoxserver.v2.entities.data.SFSArray;

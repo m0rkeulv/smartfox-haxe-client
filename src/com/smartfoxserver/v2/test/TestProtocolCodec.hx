@@ -7,7 +7,7 @@ import com.smartfoxserver.v2.kernel;
 import com.smartfoxserver.v2.protocol.IProtocolCodec;
 import com.smartfoxserver.v2.protocol.serialization.DefaultObjectDumpFormatter;
 
-import flash.utils.ByteArray<Dynamic>;
+import openfl.utils.ByteArray<Dynamic>;
 
 class TestProtocolCodec implements IProtocolCodec
 {

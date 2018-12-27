@@ -1,8 +1,6 @@
 package com.smartfoxserver.v2.entities.data;
-#if html5
-typedef ISFSArray = SFSArray;
-#else
-import flash.utils.ByteArray;
+
+import openfl.utils.ByteArray;
 
 /**
  * The<em>ISFSArray</em>interface defines all the public methods and properties
@@ -538,4 +536,3 @@ interface ISFSArray
 	 */
 	function getClass(index:Int):Dynamic;
 }
-#end

@@ -252,6 +252,7 @@ class BitSwarmClient extends EventDispatcher
 	
 	public function connect(host:String="127.0.0.1", port:Int=9933):Void
 	{
+		
 		_lastIpAddress = host;
 		_lastTcpPort = port;
 		
@@ -263,7 +264,11 @@ class BitSwarmClient extends EventDispatcher
 		}
 		else
 		{
+			#if html5
+			_socket.connect(host + "/websocket", port);
+			#else
 			_socket.connect(host, port);
+			#end
 			_connectionMode = ConnectionMode.SOCKET;
 		}
 	}
@@ -371,7 +376,6 @@ class BitSwarmClient extends EventDispatcher
 	private function onSocketConnect(evt:Event):Void
 	{
 		_connected = true;
-		
 		var event:BitSwarmEvent = new BitSwarmEvent(BitSwarmEvent.CONNECT);
 		
 		// 2nd argument not publicly documented, used Internally
@@ -464,6 +468,7 @@ class BitSwarmClient extends EventDispatcher
 	
 	private function onSocketData(evt:ProgressEvent):Void
 	{
+		trace("socket data!");
 		var buffer:ByteArray = new ByteArray();
 		buffer.endian = Endian.BIG_ENDIAN;
 		try
@@ -471,10 +476,12 @@ class BitSwarmClient extends EventDispatcher
 			
 			_socket.readBytes(buffer);
 			_ioHandler.onDataRead(buffer);
+			trace("socket data:"+ buffer);
 		}
 		catch(error:Dynamic)
 		{
 			try{
+			trace("## SocketDataError ##");
 			trace("## SocketDataError:" + error + " " + error.message);
 			trace(haxe.CallStack.toString( haxe.CallStack.exceptionStack()));
 			trace(buffer.toString());

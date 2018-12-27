@@ -2,7 +2,7 @@ package com.smartfoxserver.v2.protocol.serialization;
 
 import com.smartfoxserver.v2.exceptions.SFSError;
 
-import flash.utils.ByteArray;
+import openfl.utils.ByteArray;
 
 /** @private */
 class DefaultObjectDumpFormatter

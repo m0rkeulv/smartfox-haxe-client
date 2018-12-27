@@ -1,14 +1,9 @@
 package com.smartfoxserver.v2.requests;
-#if html5
-@:native('SFS2X.AdminMessageRequest')
-extern class AdminMessageRequest{
-	public function new(message:String, recipientMode:Dynamic, ?params:SFSObject);
-}
-#else
+
 import com.smartfoxserver.v2.entities.data.ISFSObject;
 import com.smartfoxserver.v2.requests.GenericMessageRequest;
 import com.smartfoxserver.v2.requests.MessageRecipientMode;
-import flash.errors.ArgumentError;
+import openfl.errors.ArgumentError;
 /**
  * Sends an administrator message to a specific user or a group of users.
  * 
@@ -66,4 +61,3 @@ class AdminMessageRequest extends GenericMessageRequest
 		_sendMode=recipientMode.mode;
 	}
 }
-#end

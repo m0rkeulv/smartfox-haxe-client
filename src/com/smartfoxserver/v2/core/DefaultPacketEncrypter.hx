@@ -15,8 +15,8 @@ import com.smartfoxserver.v2.bitswarm.BitSwarmClient;
 import com.smartfoxserver.v2.protocol.serialization.DefaultObjectDumpFormatter;
 import com.smartfoxserver.v2.util.CryptoKey;
 
-import flash.errors.IllegalOperationError;
-import flash.utils.ByteArray;
+import openfl.errors.IllegalOperationError;
+import openfl.utils.ByteArray;
 
 class DefaultPacketEncrypter implements IPacketEncrypter
 {

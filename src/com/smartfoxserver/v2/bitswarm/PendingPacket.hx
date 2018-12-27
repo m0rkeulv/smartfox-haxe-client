@@ -3,7 +3,7 @@ package com.smartfoxserver.v2.bitswarm;
 import com.smartfoxserver.v2.core.PacketHeader;
 import openfl.utils.Endian;
 
-import flash.utils.ByteArray;
+import openfl.utils.ByteArray;
 
 /** @private */
 class PendingPacket

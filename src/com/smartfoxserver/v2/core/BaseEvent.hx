@@ -1,6 +1,6 @@
 package com.smartfoxserver.v2.core;
 
-import flash.events.Event;
+import openfl.events.Event;
 
 /**
  * This is the base class of all the events dispatched by the SmartFoxServer 2X ActionScript 3 API.

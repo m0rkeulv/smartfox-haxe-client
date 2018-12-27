@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project>
+
+    <meta title="Castle wars 1" package="net.m0rkeulv.cwo" version="1.0.0" company="m0rkeulv" />
+    <app main="Main" path="Export" file="CastleWarsOnline" preloader="Preloader" />
+
+    <source path="Source" />
+
+
+    <haxelib name="openfl" />
+    <haxelib name="lime" />
+    <haxelib name="haxe-crypto" />
+
+
+
+</project>

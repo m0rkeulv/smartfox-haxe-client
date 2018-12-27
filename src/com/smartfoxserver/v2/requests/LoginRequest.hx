@@ -1,18 +1,11 @@
 package com.smartfoxserver.v2.requests;
-/*
-#if html5
-@:native('SFS2X.LoginRequest')
-extern class LoginRequest{
-	public function new(userName:String = "", password:String = null, params:Dynamic = null, zoneName:String = "");
-}
-#else
-*/
+
 
 import com.smartfoxserver.v2.SmartFox;
 import com.smartfoxserver.v2.entities.data.ISFSObject;
 import com.smartfoxserver.v2.exceptions.SFSValidationError;
 
-import flash.utils.ByteArray;
+import openfl.utils.ByteArray;
 
 /**
  * Logs the current user in one of the server Zones.

@@ -11,14 +11,14 @@ import com.smartfoxserver.v2.logging.Logger;
 import com.smartfoxserver.v2.protocol.serialization.DefaultObjectDumpFormatter;
 import openfl.utils.Endian;
 
-import flash.errors.IOError;
-import flash.events.DatagramSocketDataEvent;
-import flash.events.Event;
-import flash.events.IOErrorEvent;
-import flash.events.TimerEvent;
-import flash.net.DatagramSocket;
-import flash.utils.ByteArray;
-import flash.utils.Timer;
+import openfl.errors.IOError;
+import openfl.events.DatagramSocketDataEvent;
+import openfl.events.Event;
+import openfl.events.IOErrorEvent;
+import openfl.events.TimerEvent;
+import openfl.net.DatagramSocket;
+import openfl.utils.ByteArray;
+import openfl.utils.Timer;
 	
 /**
  * The<em>AirUDPManager</em>class allows clients executed in the Adobe AIR runtime to communicate with SmartFoxServer 2X using the UDP protocol.

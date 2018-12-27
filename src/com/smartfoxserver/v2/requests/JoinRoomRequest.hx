@@ -1,13 +1,7 @@
 package com.smartfoxserver.v2.requests;
 
 
-#if html5
- @:native('SFS2X.JoinRoomRequest')
- extern class JoinRoomRequest
- {
- 	public function new(room:Dynamic, ?password:String, ?roomIdToLeave:Int, ?asSpect:Bool):Void;
- }
- #else
+
 
 import com.smartfoxserver.v2.SmartFox;
 import com.smartfoxserver.v2.entities.Room;
@@ -146,4 +140,3 @@ class JoinRoomRequest extends BaseRequest
 			_sfso.putBool(KEY_AS_SPECTATOR, _asSpectator);
 	}
 }
-#end

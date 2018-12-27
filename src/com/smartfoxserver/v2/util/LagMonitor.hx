@@ -5,9 +5,9 @@ import com.smartfoxserver.v2.core.SFSEvent;
 import com.smartfoxserver.v2.requests.PingPongRequest;
 import openfl.utils.Timer;
 
-import flash.events.Event;
-import flash.events.EventDispatcher;
-import flash.events.TimerEvent;
+import openfl.events.Event;
+import openfl.events.EventDispatcher;
+import openfl.events.TimerEvent;
 //import flash.utils.Timer;
 
 /**

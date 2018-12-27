@@ -1,7 +1,5 @@
 package com.smartfoxserver.v2.entities;
-#if html5
-typedef IMMOItem = MMOItem;
-#else
+
 import com.smartfoxserver.v2.entities.data.Vec3D;
 import com.smartfoxserver.v2.entities.variables.IMMOItemVariable;
 
@@ -66,4 +64,3 @@ interface IMMOItem
 	 */
 	public var aoiEntryPoint(get, set):Vec3D;
 }
-#end
