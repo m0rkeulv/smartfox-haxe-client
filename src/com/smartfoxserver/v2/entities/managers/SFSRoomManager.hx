@@ -241,7 +241,6 @@ class SFSRoomManager implements IRoomManager
 	public function getRoomListFromGroup(groupId:String):Array<Room>
 	{
 		var roomList:Array<Room> = new Array();
-		trace("getRoomListFromGroup:" +_roomsById);
 		for(room in _roomsById)
 		{
 			
