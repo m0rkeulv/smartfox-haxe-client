@@ -1,17 +1,22 @@
 package com.smartfoxserver.v2.util;
 /**
-*  Class only used to convert flash byteArray to haxe crypto array and back
+*   Converts between openFL and haxe-crypto ByteArrays
 **/
+import com.hurlant.util.Endian;
 class ByteArrayConverter {
-	#if flash
-	public static function toFlashByteArray(byteArray:com.hurlant.util.ByteArray):flash.utils.ByteArray {
-		var byteData = new flash.utils.ByteArray();
+
+	public static function toOpenFlByteArray(byteArray:com.hurlant.util.ByteArray):openfl.utils.ByteArray {
+		var byteData = new openfl.utils.ByteArray();
+		byteData.endian = byteArray.endian == Endian.LITTLE_ENDIAN
+						?  openfl.utils.Endian.LITTLE_ENDIAN : openfl.utils.Endian.BIG_ENDIAN;
 		for (byte in byteArray.toBytesArray()) byteData.writeByte(byte);
 		return byteData;
 	}
-	
-	public static function fromFlashByteArray(byteArray:flash.utils.ByteArray):com.hurlant.util.ByteArray {
+
+	public static function fromOpenFLByteArray(byteArray:openfl.utils.ByteArray):com.hurlant.util.ByteArray {
 		var byteData = new com.hurlant.util.ByteArray();
+		byteData.endian = byteArray.endian == openfl.utils.Endian.LITTLE_ENDIAN
+						?  com.hurlant.util.Endian.LITTLE_ENDIAN: com.hurlant.util.Endian.BIG_ENDIAN;
 		var byte:Int;
 		byteArray.position = 0;
 		while (byteArray.position < byteArray.length) {
@@ -19,5 +24,4 @@ class ByteArrayConverter {
 		}
 		return byteData;
 	}
-	#end
 }
