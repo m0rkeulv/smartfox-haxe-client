@@ -70,9 +70,11 @@ class CryptoInitializer
 	{
 		var loader:URLLoader = cast evt.target;
 		var rawData:String = cast loader.data;
-		
-		var byteData:ByteArray = cast Base64.decodeToByteArray(rawData);
-		
+		#if flash
+		var byteData = com.smartfoxserver.v2.util.ByteArrayConverter.toFlashByteArray(Base64.decodeToByteArray(rawData));
+		#else
+		var byteData:ByteArray = cast Base64.decodeToByteArray(rawData); 
+		#end
 		var iv:ByteArray = new ByteArray();
 		iv.endian = Endian.BIG_ENDIAN;
 		var key:ByteArray = new ByteArray();
