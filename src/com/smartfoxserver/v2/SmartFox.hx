@@ -876,19 +876,8 @@ class SmartFox extends EventDispatcher
 	private var _lastIpAddress:String;
 	
 	// Client details passed to setClientDetails method
-	private var _clientDetails:String =
-	#if flash
- 	"Flash"
-	#elseif neko
-	"Neko"
-	#elseif linux
-	"Linux"
-	#elseif windows
-	"Windows"
-	#else
-	"Unknown"
-	#end
-	;	
+	private var _clientDetails:String = "";
+	
 	
 	/**
 	 * Creates a new<em>SmartFox</em>instance.
@@ -911,8 +900,42 @@ class SmartFox extends EventDispatcher
 		_log.enableEventDispatching = true;
 		_debug = debug;
 		
+        setClientDetails(getPlatform(),getPlatformVersion());
 		initialize();
 	}
+    
+    private inline function  getPlatform():String {
+        #if flash
+            return "Flash";
+        #elseif air
+            return "Air";
+        #elseif html5
+            return "Html5";
+        #elseif neko
+            return "Neko";
+        #elseif linux
+            return "Linux";
+        #elseif windows
+            return "Windows";
+        #elseif mac
+            return "Mac OS";
+        #elseif ios
+            return "iOS"
+        #elseif android
+            return "Android";
+        #else
+            return Capabilities.os;
+        #end
+    }
+    private inline function getPlatformVersion():String {
+        #if flash
+            return Capabilities.version;
+        #elseif air
+            return Capabilities.version;
+        #else
+        	return Capabilities.os;
+        #end
+    }
 	
 	// This is done ONCE in the whole life cycle
 	private function initialize():Void
