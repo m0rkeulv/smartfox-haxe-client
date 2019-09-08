@@ -920,7 +920,7 @@ class SmartFox extends EventDispatcher
         #elseif mac
             return "Mac OS";
         #elseif ios
-            return "iOS"
+            return "iOS";
         #elseif android
             return "Android";
         #else
