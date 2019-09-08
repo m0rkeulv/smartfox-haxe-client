@@ -1,5 +1,6 @@
 package com.smartfoxserver.v2.core;
 
+import haxe.DynamicAccess;
 import openfl.events.Event;
 
 /**
@@ -1698,8 +1699,8 @@ class SFSEvent extends BaseEvent
 		//return formatToString("SFSEvent", "type", "bubbles", "cancelable", "eventPhase", "params");
 	//}
 	
-	public var parameters(get, null):Dynamic;
-	function get_parameters():Dynamic 
+	public var parameters(get, null):DynamicAccess<Dynamic>;
+	function get_parameters():DynamicAccess<Dynamic>
 	{
 		return this.params;
 	}
