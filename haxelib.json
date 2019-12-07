@@ -10,12 +10,12 @@
     "boorik <Vincent Blanchet>"
   ],
   "releasenote": "now match as3 version 1.6.0",
-  "version": "0.2.0",
+  "version": "0.2.5",
   "classPath": "src",
   "url": "https://github.com/chapatiz/smartfox-haxe-client",
   "dependencies": {
     "lime": "",
     "openfl": "",
-    "haxe-crypto":""
+    "crypto":""
   }
 }

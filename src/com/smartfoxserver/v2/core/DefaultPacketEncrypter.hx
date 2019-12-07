@@ -5,13 +5,10 @@ package com.smartfoxserver.v2.core;
  * @author vincent blanchet
  */
 
-import com.smartfoxserver.v2.util.ByteArrayConverter;
+import haxe.crypto.mode.Mode;
+import haxe.crypto.Aes;
+import haxe.crypto.padding.Padding;
 
-import com.hurlant.crypto.Crypto;
-import com.hurlant.crypto.pad.IPad;
-import com.hurlant.crypto.pad.PKCS5;
-import com.hurlant.crypto.symmetric.mode.IVMode;
-import com.hurlant.crypto.symmetric.ICipher;
 
 import com.smartfoxserver.v2.bitswarm.BitSwarmClient;
 import com.smartfoxserver.v2.protocol.serialization.DefaultObjectDumpFormatter;
@@ -21,8 +18,11 @@ import openfl.utils.ByteArray;
 
 class DefaultPacketEncrypter implements IPacketEncrypter
 {
+	private var aes:Aes = new Aes();
 	private var bitSwarm:BitSwarmClient;
-	private static var ALGORITHM:String = "aes-cbc";
+	
+	private static var ALGORITHM:Mode = Mode.CBC;
+	private static var PADDING:Padding = Padding.PKCS7;
 	
 	public function new(bitSwarm:BitSwarmClient)
 	{
@@ -31,7 +31,6 @@ class DefaultPacketEncrypter implements IPacketEncrypter
 	public function encrypt(data:ByteArray):Void
 	{
 		var ck:CryptoKey = bitSwarm.cryptoKey;
-		var padding:IPad = new PKCS5();
 		
 		/*
 		trace("IV  : \n" + DefaultObjectDumpFormatter.hexDump(ck.iv))
@@ -39,42 +38,27 @@ class DefaultPacketEncrypter implements IPacketEncrypter
 		trace("DATA: \n" + DefaultObjectDumpFormatter.hexDump(data))
 		*/
 
-		var ckKey  = ByteArrayConverter.fromOpenFLByteArray(ck.key);
-		var ckIv = ByteArrayConverter.fromOpenFLByteArray(ck.iv);
 		
-			var cipher:ICipher = Crypto.getCipher(ALGORITHM, ckKey, padding);
-			var ivmode:IVMode = cast(cipher, IVMode);
-			ivmode.IV = ckIv;
-			//hackish way to encrypt/decrypt replacing data at the end
-			var dataTmp = ByteArrayConverter.fromOpenFLByteArray(data);
-			cipher.encrypt(dataTmp);
+		aes.init(ck.key, ck.iv);
 		
-			data.position = 0;
-			dataTmp.position = 0;
-			while (dataTmp.position < dataTmp.length) data.writeByte(dataTmp.readByte());
+		
+		var encrypted = aes.encrypt(ALGORITHM, data, PADDING);
+		
+		data.clear();
+		data.writeBytes(encrypted);
 
-		
-		
 	}
 	
 	public function decrypt(data:ByteArray):Void
 	{
 		var ck:CryptoKey = bitSwarm.cryptoKey;
-		var padding:IPad = new PKCS5();
+
+		aes.init(ck.key, ck.iv);
 		
-		var ckKey  = ByteArrayConverter.fromOpenFLByteArray(ck.key);
-		var ckIv = ByteArrayConverter.fromOpenFLByteArray(ck.iv);
+		var encrypted = aes.decrypt(ALGORITHM,  data, PADDING);
 
-		var cipher:ICipher = Crypto.getCipher(ALGORITHM, ckKey, padding);
-		var ivmode:IVMode = cast(cipher, IVMode);
-		ivmode.IV = ckIv;
-		//hackish way to encrypt/decrypt replacing data at the end
-		var dataTmp = ByteArrayConverter.fromOpenFLByteArray(data);
-		cipher.decrypt(dataTmp);
-
-		data.position = 0;
-		dataTmp.position = 0;
-		while (dataTmp.position < dataTmp.length) data.writeByte(dataTmp.readByte());
+		data.clear();
+		data.writeBytes(encrypted);
 		
 		
 		

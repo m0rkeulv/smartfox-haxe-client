@@ -9,7 +9,7 @@
 
     <haxelib name="openfl" />
     <haxelib name="lime" />
-    <haxelib name="haxe-crypto" />
+    <haxelib name="crypto" />
 
 
 

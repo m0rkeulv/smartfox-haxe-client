@@ -14,18 +14,14 @@ https://github.com/boorik/smartfox-haxe-client
 ----------------------------------
 CURRENTLY WORKING WITH :
 
-haxe: 4.0.2
+haxe: 4.0.3
 
 lime: 7.6.3
 
 openfl: 8.9.5
 
-haxe-crypto: 0.0.7
+crypto: 0.3.0 (haxe-crypto has been replaced with HaxeFoundation/crypto)
 
-- Note: 
-Hashlink has strict casting rules and SSL wont work with haxe-crypto 0.0.7.
-You can find a fork with this fixed here:
-https://github.com/m0rkeulv/haxe-crypto
 
 ----------------------------------
 
@@ -44,3 +40,9 @@ add in your project.xml :
 
 Then you can use it like the as3 api, check the as3 exemples there :
 http://docs2x.smartfoxserver.com/ExamplesFlash/introduction
+
+
+## Changelog:
+### 0.2.5
+ - replaced haxe-crypto has been replaced with HaxeFoundation/crypto
+ - deleted passwordUtil as MD5 really should not be used.

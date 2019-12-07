@@ -5,12 +5,9 @@ import com.smartfoxserver.v2.bitswarm.bbox.BBClient;
 import com.smartfoxserver.v2.bitswarm.bbox.BBEvent;
 import com.smartfoxserver.v2.controllers.ExtensionController;
 import com.smartfoxserver.v2.controllers.SystemController;
-import com.smartfoxserver.v2.exceptions.SFSError;
-import com.smartfoxserver.v2.logging.Logger;
 import com.smartfoxserver.v2.util.ClientDisconnectionReason;
 import com.smartfoxserver.v2.util.ConnectionMode;
 import com.smartfoxserver.v2.util.CryptoKey;
-import haxe.CallStack;
 import openfl.errors.ArgumentError;
 import openfl.utils.Endian;
 

@@ -1,6 +1,5 @@
 package com.smartfoxserver.v2.bitswarm.bbox;
 
-//import com.hurlant.util.Base64;
 
 import openfl.errors.IllegalOperationError;
 import openfl.events.Event;

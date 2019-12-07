@@ -1,5 +1,5 @@
 package com.smartfoxserver.v2.util;
-import com.hurlant.util.Base64;
+import haxe.crypto.Base64;
 import com.smartfoxserver.v2.core.SFSEvent;
 import openfl.errors.IllegalOperationError;
 import openfl.events.Event;
@@ -71,7 +71,7 @@ class CryptoInitializer
 		var loader:URLLoader = cast evt.target;
 		var rawData:String = cast loader.data;
 
-		var byteData = ByteArrayConverter.toOpenFlByteArray(Base64.decodeToByteArray(rawData));
+		var byteData =  ByteArrayData.fromBytes(Base64.decode(rawData));
 		
 		var iv:ByteArray = new ByteArray();
 		iv.endian = Endian.BIG_ENDIAN;
