@@ -274,7 +274,10 @@ class BitSwarmClient extends EventDispatcher
 	}
 	
 	public function send(message:IMessage):Void
-	{	
+	{
+		#if debug 
+		sfs.logger.debug("sending message:"+Std.string(message)); 
+		#end
 		_ioHandler.codec.onPacketWrite(message);
 	}
 	
@@ -468,7 +471,6 @@ class BitSwarmClient extends EventDispatcher
 	
 	private function onSocketData(evt:ProgressEvent):Void
 	{
-		trace("socket data!");
 		var buffer:ByteArray = new ByteArray();
 		buffer.endian = Endian.BIG_ENDIAN;
 		try
@@ -476,7 +478,9 @@ class BitSwarmClient extends EventDispatcher
 			
 			_socket.readBytes(buffer);
 			_ioHandler.onDataRead(buffer);
-			trace("socket data:"+ buffer);
+			#if debug
+			sfs.logger.debug("socket data:"+ buffer.length +"bytes");
+			#end
 		}
 		catch(error:Dynamic)
 		{

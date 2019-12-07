@@ -14,13 +14,18 @@ https://github.com/boorik/smartfox-haxe-client
 ----------------------------------
 CURRENTLY WORKING WITH :
 
-haxe: 4-preview5
+haxe: 4.0.2
 
-lime: 7.2.0
+lime: 7.6.3
 
-openfl: 8.7.0
+openfl: 8.9.5
 
 haxe-crypto: 0.0.7
+
+- Note: 
+Hashlink has strict casting rules and SSL wont work with haxe-crypto 0.0.7.
+You can find a fork with this fixed here:
+https://github.com/m0rkeulv/haxe-crypto
 
 ----------------------------------
 

@@ -34,11 +34,8 @@ class ExtensionController extends BaseController
 		
 		evtParams.cmd = obj.getUtfString(KEY_CMD);
 		evtParams.params = obj.getSFSObject(KEY_PARAMS);
-		if(obj.containsKey(KEY_ROOM))
-			evtParams.sourceRoom = obj.getInt(KEY_ROOM);
-				
-		if(message.isUDP)
-			evtParams.packetId = message.packetId;
+		if(obj.containsKey(KEY_ROOM))evtParams.sourceRoom = obj.getInt(KEY_ROOM);
+		if(message.isUDP)evtParams.packetId = message.packetId;
 		
 		sfs.dispatchEvent(new SFSEvent(SFSEvent.EXTENSION_RESPONSE, evtParams));
 	}

@@ -12,8 +12,6 @@ import com.smartfoxserver.v2.exceptions.SFSError;
 import com.smartfoxserver.v2.logging.Logger;
 import com.smartfoxserver.v2.protocol.IProtocolCodec;
 
-import openfl.utils.ByteArray;
-
 /** @private */
 class SFSProtocolCodec implements IProtocolCodec
 {
@@ -124,7 +122,7 @@ class SFSProtocolCodec implements IProtocolCodec
 	
 	private function dispatchRequest(requestObject:ISFSObject):Void
 	{
-		var message:IMessage = new Message();
+		var message = new Message();
 
 		// Check controller ID
 		if(requestObject.isNull(CONTROLLER_ID))
@@ -133,14 +131,16 @@ class SFSProtocolCodec implements IProtocolCodec
 		// Check if action ID exist 
 		if(requestObject.isNull(ACTION_ID))
 			throw new SFSCodecError("Request rejected:No Action ID in request!");
-		var id:Int = requestObject.getByte(ACTION_ID);//Strange fix to avoid message.id == null by doing message.id = requestObject.getByte(ACTION_ID) directly
-		message.id =id;
-		var content:ISFSObject = requestObject.getSFSObject(PARAM_ID);
-		message.content = content;
-		var isUDP:Bool = requestObject.containsKey(UDP_PACKET_ID);
-		message.isUDP = isUDP;
 		
-		if(message.isUDP)
+		var id:Int = requestObject.getByte(ACTION_ID);//Strange fix to avoid message.id == null by doing message.id = requestObject.getByte(ACTION_ID) directly
+		var content:ISFSObject = requestObject.getSFSObject(PARAM_ID);
+		var isUDP:Bool = requestObject.containsKey(UDP_PACKET_ID);
+		
+		message.id = id;
+		message.content = content;
+		message.isUDP = isUDP;
+
+		if (message.isUDP)
 		{
 			var packetId:Float = requestObject.getLong(UDP_PACKET_ID);
 			message.packetId = packetId;
