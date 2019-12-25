@@ -154,7 +154,7 @@ class SystemController extends BaseController
 	private function fnHandshake(msg:IMessage):Void
 	{
 		var evtParams:Dynamic = { message:msg };
-		sfs.dispatchEvent(new SFSEvent(SFSEvent.HANDSHAKE, evtParams));
+		sfs.dispatchSFSEvent(SFSEvent.HANDSHAKE, evtParams);
 	}
 	
 	private function fnLogin(msg:IMessage):Void
@@ -188,7 +188,7 @@ class SystemController extends BaseController
 			evtParams.user = sfs.mySelf;
 			evtParams.data = obj.getSFSObject(LoginRequest.KEY_PARAMS);
 			
-			sfs.dispatchEvent(new SFSEvent(SFSEvent.LOGIN, evtParams));
+			sfs.dispatchSFSEvent(SFSEvent.LOGIN, evtParams);
 		}
 		
 		// Failure
@@ -198,7 +198,7 @@ class SystemController extends BaseController
 			var errorMsg:String = SFSErrorCodes.getErrorMessage(errorCd, obj.getUtfStringArray(BaseRequest.KEY_ERROR_PARAMS));
 			evtParams = { errorMessage:errorMsg, errorCode:errorCd };
 			
-			sfs.dispatchEvent(new SFSEvent(SFSEvent.LOGIN_ERROR, evtParams));
+			sfs.dispatchSFSEvent(SFSEvent.LOGIN_ERROR, evtParams);
 		}
 	}
 	
@@ -218,7 +218,7 @@ class SystemController extends BaseController
 			roomManager.addRoom(newRoom);
 
 			evtParams.room = newRoom;
-			sfs.dispatchEvent(new SFSEvent(SFSEvent.ROOM_ADD, evtParams));
+			sfs.dispatchSFSEvent(SFSEvent.ROOM_ADD, evtParams);
 		}
 		
 		// Failure
@@ -228,7 +228,7 @@ class SystemController extends BaseController
 			var errorMsg:String = SFSErrorCodes.getErrorMessage(errorCd, obj.getUtfStringArray(BaseRequest.KEY_ERROR_PARAMS));
 			evtParams = { errorMessage:errorMsg, errorCode:errorCd };
 			
-			sfs.dispatchEvent(new SFSEvent(SFSEvent.ROOM_CREATION_ERROR, evtParams));
+			sfs.dispatchSFSEvent(SFSEvent.ROOM_CREATION_ERROR, evtParams);
 		}
 	}
 	
@@ -283,7 +283,7 @@ class SystemController extends BaseController
 			sfs.lastJoinedRoom = room;
 
 			evtParams.room = room;
-			sfs.dispatchEvent(new SFSEvent(SFSEvent.ROOM_JOIN, evtParams));
+			sfs.dispatchSFSEvent(SFSEvent.ROOM_JOIN, evtParams);
 		}
 		
 		// Failure
@@ -293,7 +293,7 @@ class SystemController extends BaseController
 			var errorMsg:String = SFSErrorCodes.getErrorMessage(errorCd, sfso.getUtfStringArray(BaseRequest.KEY_ERROR_PARAMS));
 			evtParams = { errorMessage:errorMsg, errorCode:errorCd };
 			
-			sfs.dispatchEvent(new SFSEvent(SFSEvent.ROOM_JOIN_ERROR, evtParams));
+			sfs.dispatchSFSEvent(SFSEvent.ROOM_JOIN_ERROR, evtParams);
 		}
 	}
 	
@@ -311,7 +311,7 @@ class SystemController extends BaseController
 			
 			room.addUser(user);
 			
-			sfs.dispatchEvent(new SFSEvent(SFSEvent.USER_ENTER_ROOM, {user:user, room:room}));	
+			sfs.dispatchSFSEvent(SFSEvent.USER_ENTER_ROOM, {user:user, room:room});	
 		} 
 	}
 	
@@ -334,7 +334,7 @@ class SystemController extends BaseController
 			room.userCount = uCount;
 			room.spectatorCount = sCount;
 			
-			sfs.dispatchEvent(new SFSEvent(SFSEvent.USER_COUNT_CHANGE, { room:room, uCount:uCount, sCount:sCount } ));
+			sfs.dispatchSFSEvent(SFSEvent.USER_COUNT_CHANGE, { room:room, uCount:uCount, sCount:sCount } );
 		}
 	}
 	
@@ -364,7 +364,7 @@ class SystemController extends BaseController
 			// Fire one event in each room
 			for(room in joinedRooms)
 			{
-				sfs.dispatchEvent(new SFSEvent(SFSEvent.USER_EXIT_ROOM, { user:user, room:room } ));
+				sfs.dispatchSFSEvent(SFSEvent.USER_EXIT_ROOM, { user:user, room:room } );
 			}
 		}
 	}
@@ -389,7 +389,7 @@ class SystemController extends BaseController
 			
 			// Fire event			
 			evtParams.room = room;
-			sfs.dispatchEvent(new SFSEvent(SFSEvent.ROOM_REMOVE, evtParams));
+			sfs.dispatchSFSEvent(SFSEvent.ROOM_REMOVE, evtParams);
 		}
 	}
 	
@@ -441,7 +441,7 @@ class SystemController extends BaseController
 			evtParams.data = sfso.getSFSObject(GenericMessageRequest.KEY_XTRA_PARAMS);
 			
 			 // Fire event
-			sfs.dispatchEvent(new SFSEvent(SFSEvent.PUBLIC_MESSAGE, evtParams));
+			sfs.dispatchSFSEvent(SFSEvent.PUBLIC_MESSAGE, evtParams);
 		}
 		else
 			log.warn("Unexpected, PublicMessage target room doesn't exist. RoomId:" + rId);
@@ -473,7 +473,7 @@ class SystemController extends BaseController
 		evtParams.data = sfso.getSFSObject(GenericMessageRequest.KEY_XTRA_PARAMS);
 		
 		 // Fire event
-		sfs.dispatchEvent(new SFSEvent(SFSEvent.PRIVATE_MESSAGE, evtParams));
+		sfs.dispatchSFSEvent(SFSEvent.PRIVATE_MESSAGE, evtParams);
 	}
 	
 	public function handleBuddyMessage(sfso:ISFSObject):Void
@@ -508,7 +508,7 @@ class SystemController extends BaseController
 		evtParams.data = sfso.getSFSObject(GenericMessageRequest.KEY_XTRA_PARAMS);
 		
 		 // Fire event
-		sfs.dispatchEvent(new SFSEvent(SFSEvent.MODERATOR_MESSAGE, evtParams));
+		sfs.dispatchSFSEvent(SFSEvent.MODERATOR_MESSAGE, evtParams);
 	}
 	
 	public function handleAdminMessage(sfso:ISFSObject):Void
@@ -520,7 +520,7 @@ class SystemController extends BaseController
 		evtParams.data = sfso.getSFSObject(GenericMessageRequest.KEY_XTRA_PARAMS);
 		
 		 // Fire event
-		sfs.dispatchEvent(new SFSEvent(SFSEvent.ADMIN_MESSAGE, evtParams));
+		sfs.dispatchSFSEvent(SFSEvent.ADMIN_MESSAGE, evtParams);
 	}
 	
 	public function handleObjectMessage(sfso:ISFSObject):Void
@@ -532,7 +532,7 @@ class SystemController extends BaseController
 		evtParams.message = sfso.getSFSObject(GenericMessageRequest.KEY_XTRA_PARAMS);
 		
 		 // Fire event
-		sfs.dispatchEvent(new SFSEvent(SFSEvent.OBJECT_MESSAGE, evtParams));
+		sfs.dispatchSFSEvent(SFSEvent.OBJECT_MESSAGE, evtParams);
 	}
 	
 	private function fnUserExitRoom(msg:IMessage):Void
@@ -571,7 +571,7 @@ class SystemController extends BaseController
 			evtParams.room = room;
 			
 			// Fire event
-			sfs.dispatchEvent(new SFSEvent(SFSEvent.USER_EXIT_ROOM, evtParams));
+			sfs.dispatchSFSEvent(SFSEvent.USER_EXIT_ROOM, evtParams);
 		}
 		else
 			log.debug("Failed to handle UserExit event. Room:" + room + ", User:" + user);
@@ -614,7 +614,7 @@ class SystemController extends BaseController
 			evtParams.changedVars = changedVarNames;
 			evtParams.room = targetRoom;
 			
-			sfs.dispatchEvent(new SFSEvent(SFSEvent.ROOM_VARIABLES_UPDATE, evtParams));
+			sfs.dispatchSFSEvent(SFSEvent.ROOM_VARIABLES_UPDATE, evtParams);
 		} 
 		
 		else
@@ -645,7 +645,7 @@ class SystemController extends BaseController
 			evtParams.changedVars = changedVarNames;
 			evtParams.user = user;
 			
-			sfs.dispatchEvent(new SFSEvent(SFSEvent.USER_VARIABLES_UPDATE, evtParams));
+			sfs.dispatchSFSEvent(SFSEvent.USER_VARIABLES_UPDATE, evtParams);
 		}
 		else
 			log.warn("UserVariablesUpdate:unknown user id=" + uId);
@@ -674,7 +674,7 @@ class SystemController extends BaseController
 			// Pass the new rooms that are present in the subscribed group
 			evtParams.newRooms = sfs.roomManager.getRoomListFromGroup(groupId);
 			
-			sfs.dispatchEvent(new SFSEvent(SFSEvent.ROOM_GROUP_SUBSCRIBE, evtParams));
+			sfs.dispatchSFSEvent(SFSEvent.ROOM_GROUP_SUBSCRIBE, evtParams);
 		}
 		
 		//:::Failure:::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -684,7 +684,7 @@ class SystemController extends BaseController
 			var errorMsg:String = SFSErrorCodes.getErrorMessage(errorCd, sfso.getUtfStringArray(BaseRequest.KEY_ERROR_PARAMS));
 			evtParams = { errorMessage:errorMsg, errorCode:errorCd };
 			
-			sfs.dispatchEvent(new SFSEvent(SFSEvent.ROOM_GROUP_SUBSCRIBE_ERROR, evtParams));
+			sfs.dispatchSFSEvent(SFSEvent.ROOM_GROUP_SUBSCRIBE_ERROR, evtParams);
 		}
 	}
 	
@@ -706,7 +706,7 @@ class SystemController extends BaseController
 			
 			// Pass the groupId
 			evtParams.groupId = groupId;
-			sfs.dispatchEvent(new SFSEvent(SFSEvent.ROOM_GROUP_UNSUBSCRIBE, evtParams));
+			sfs.dispatchSFSEvent(SFSEvent.ROOM_GROUP_UNSUBSCRIBE, evtParams);
 		}
 		
 		//:::FAILURE:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -716,7 +716,7 @@ class SystemController extends BaseController
 			var errorMsg:String = SFSErrorCodes.getErrorMessage(errorCd, sfso.getUtfStringArray(BaseRequest.KEY_ERROR_PARAMS));
 			evtParams = { errorMessage:errorMsg, errorCode:errorCd };
 			
-			sfs.dispatchEvent(new SFSEvent(SFSEvent.ROOM_GROUP_UNSUBSCRIBE_ERROR, evtParams));
+			sfs.dispatchSFSEvent(SFSEvent.ROOM_GROUP_UNSUBSCRIBE_ERROR, evtParams);
 		}
 	}
 	
@@ -739,7 +739,7 @@ class SystemController extends BaseController
 				sfs.roomManager.changeRoomName(targetRoom, sfso.getUtfString(ChangeRoomNameRequest.KEY_NAME));
 				
 				evtParams.room = targetRoom;
-				sfs.dispatchEvent(new SFSEvent(SFSEvent.ROOM_NAME_CHANGE, evtParams));	
+				sfs.dispatchSFSEvent(SFSEvent.ROOM_NAME_CHANGE, evtParams);	
 			}
 			
 			// Room not found locally, log error
@@ -756,7 +756,7 @@ class SystemController extends BaseController
 			var errorMsg:String = SFSErrorCodes.getErrorMessage(errorCd, sfso.getUtfStringArray(BaseRequest.KEY_ERROR_PARAMS));
 			evtParams = { errorMessage:errorMsg, errorCode:errorCd };
 			
-			sfs.dispatchEvent(new SFSEvent(SFSEvent.ROOM_NAME_CHANGE_ERROR, evtParams));
+			sfs.dispatchSFSEvent(SFSEvent.ROOM_NAME_CHANGE_ERROR, evtParams);
 		}
 		
 	}
@@ -777,7 +777,7 @@ class SystemController extends BaseController
 			{
 				sfs.roomManager.changeRoomPasswordState(targetRoom, sfso.getBool(ChangeRoomPasswordStateRequest.KEY_PASS));
 				evtParams.room = targetRoom;
-				sfs.dispatchEvent(new SFSEvent(SFSEvent.ROOM_PASSWORD_STATE_CHANGE, evtParams));
+				sfs.dispatchSFSEvent(SFSEvent.ROOM_PASSWORD_STATE_CHANGE, evtParams);
 			}
 			
 			else
@@ -794,7 +794,7 @@ class SystemController extends BaseController
 			var errorMsg:String = SFSErrorCodes.getErrorMessage(errorCd, sfso.getUtfStringArray(BaseRequest.KEY_ERROR_PARAMS));
 			evtParams = { errorMessage:errorMsg, errorCode:errorCd };
 			
-			sfs.dispatchEvent(new SFSEvent(SFSEvent.ROOM_PASSWORD_STATE_CHANGE_ERROR, evtParams));
+			sfs.dispatchSFSEvent(SFSEvent.ROOM_PASSWORD_STATE_CHANGE_ERROR, evtParams);
 		}
 	}
 	
@@ -820,7 +820,7 @@ class SystemController extends BaseController
 				);
 				
 				evtParams.room = targetRoom;
-				sfs.dispatchEvent(new SFSEvent(SFSEvent.ROOM_CAPACITY_CHANGE, evtParams));
+				sfs.dispatchSFSEvent(SFSEvent.ROOM_CAPACITY_CHANGE, evtParams);
 			}
 			
 			else
@@ -837,7 +837,7 @@ class SystemController extends BaseController
 			var errorMsg:String = SFSErrorCodes.getErrorMessage(errorCd, sfso.getUtfStringArray(BaseRequest.KEY_ERROR_PARAMS));
 			evtParams = { errorMessage:errorMsg, errorCode:errorCd };
 			
-			sfs.dispatchEvent(new SFSEvent(SFSEvent.ROOM_CAPACITY_CHANGE_ERROR, evtParams));
+			sfs.dispatchSFSEvent(SFSEvent.ROOM_CAPACITY_CHANGE_ERROR, evtParams);
 		}
 	}
 	
@@ -849,7 +849,7 @@ class SystemController extends BaseController
 		var evtParams:Dynamic = { };
 		
 		evtParams.zoneName = sfso.getUtfString(LogoutRequest.KEY_ZONE_NAME);
-		sfs.dispatchEvent(new SFSEvent(SFSEvent.LOGOUT, evtParams));
+		sfs.dispatchSFSEvent(SFSEvent.LOGOUT, evtParams);
 		
 	}
 	
@@ -882,7 +882,7 @@ class SystemController extends BaseController
 						evtParams.user = user;				// who did it
 						evtParams.playerId = playerId;		// the new playerId
 						
-						sfs.dispatchEvent(new SFSEvent(SFSEvent.SPECTATOR_TO_PLAYER, evtParams));
+						sfs.dispatchSFSEvent(SFSEvent.SPECTATOR_TO_PLAYER, evtParams);
 					}
 					else
 						log.warn('User:$user not joined in Room:$targetRoom, SpectatorToPlayer failed.');
@@ -902,7 +902,7 @@ class SystemController extends BaseController
 			var errorMsg:String = SFSErrorCodes.getErrorMessage(errorCd, sfso.getUtfStringArray(BaseRequest.KEY_ERROR_PARAMS));
 			evtParams = { errorMessage:errorMsg, errorCode:errorCd };
 			
-			sfs.dispatchEvent(new SFSEvent(SFSEvent.SPECTATOR_TO_PLAYER_ERROR, evtParams));
+			sfs.dispatchSFSEvent(SFSEvent.SPECTATOR_TO_PLAYER_ERROR, evtParams);
 		}
 	}
 	
@@ -933,7 +933,7 @@ class SystemController extends BaseController
 						evtParams.room = targetRoom;			// where it happened
 						evtParams.user = user;				// who did it
 						
-						sfs.dispatchEvent(new SFSEvent(SFSEvent.PLAYER_TO_SPECTATOR, evtParams));
+						sfs.dispatchSFSEvent(SFSEvent.PLAYER_TO_SPECTATOR, evtParams);
 					}
 					else
 						log.warn('User:$user + " not joined in Room:$targetRoom, PlayerToSpectator failed.');
@@ -952,7 +952,7 @@ class SystemController extends BaseController
 			var errorMsg:String = SFSErrorCodes.getErrorMessage(errorCd, sfso.getUtfStringArray(BaseRequest.KEY_ERROR_PARAMS));
 			evtParams = { errorMessage:errorMsg, errorCode:errorCd };
 				
-			sfs.dispatchEvent(new SFSEvent(SFSEvent.PLAYER_TO_SPECTATOR_ERROR, evtParams));
+			sfs.dispatchSFSEvent(SFSEvent.PLAYER_TO_SPECTATOR_ERROR, evtParams);
 		}
 	}
 	
@@ -1285,7 +1285,7 @@ class SystemController extends BaseController
 		}
 		
 		evtParams.rooms = roomList;
-		sfs.dispatchEvent(new SFSEvent(SFSEvent.ROOM_FIND_RESULT, evtParams));
+		sfs.dispatchSFSEvent(SFSEvent.ROOM_FIND_RESULT, evtParams);
 	}
 	
 	private function fnFindUsers(msg:IMessage):Void
@@ -1312,7 +1312,7 @@ class SystemController extends BaseController
 		}
 		
 		evtParams.users = userList;
-		sfs.dispatchEvent(new SFSEvent(SFSEvent.USER_FIND_RESULT, evtParams));
+		sfs.dispatchSFSEvent(SFSEvent.USER_FIND_RESULT, evtParams);
 	}
 	
 	private function fnInviteUsers(msg:IMessage):Void
@@ -1334,7 +1334,7 @@ class SystemController extends BaseController
 		invitation.id = invitationId;
 		
 		evtParams.invitation = invitation;
-		sfs.dispatchEvent(new SFSEvent(SFSEvent.INVITATION, evtParams));
+		sfs.dispatchSFSEvent(SFSEvent.INVITATION, evtParams);
 	}
 	
 	private function fnInvitationReply(msg:IMessage):Void
@@ -1360,7 +1360,7 @@ class SystemController extends BaseController
 			evtParams.reply = reply;
 			evtParams.data = data;
 			
-			sfs.dispatchEvent(new SFSEvent(SFSEvent.INVITATION_REPLY, evtParams));
+			sfs.dispatchSFSEvent(SFSEvent.INVITATION_REPLY, evtParams);
 			
 		}
 		
@@ -1371,7 +1371,7 @@ class SystemController extends BaseController
 			var errorMsg:String = SFSErrorCodes.getErrorMessage(errorCd, sfso.getUtfStringArray(BaseRequest.KEY_ERROR_PARAMS));
 			evtParams = { errorMessage:errorMsg, errorCode:errorCd };
 			
-			sfs.dispatchEvent(new SFSEvent(SFSEvent.INVITATION_REPLY_ERROR, evtParams));
+			sfs.dispatchSFSEvent(SFSEvent.INVITATION_REPLY_ERROR, evtParams);
 		}
 	}
 	
@@ -1388,7 +1388,7 @@ class SystemController extends BaseController
 			var errorMsg:String = SFSErrorCodes.getErrorMessage(errorCd, sfso.getUtfStringArray(BaseRequest.KEY_ERROR_PARAMS));
 			evtParams = { errorMessage:errorMsg, errorCode:errorCd };
 			
-			sfs.dispatchEvent(new SFSEvent(SFSEvent.ROOM_JOIN_ERROR, evtParams));
+			sfs.dispatchSFSEvent(SFSEvent.ROOM_JOIN_ERROR, evtParams);
 		}
 	}
 	
@@ -1397,8 +1397,7 @@ class SystemController extends BaseController
 		var avg:Float=sfs.lagMonitor.onPingPong();
 
 		// Redispatch at the user level
-		var newEvt:SFSEvent = new SFSEvent(SFSEvent.PING_PONG, { lagValue:avg } );
-		sfs.dispatchEvent(newEvt);
+		sfs.dispatchSFSEvent(SFSEvent.PING_PONG, { lagValue:avg } );
 	}
 	
 	/*
@@ -1514,7 +1513,7 @@ class SystemController extends BaseController
 		evtParams.addedUsers=addedUsers;
 		evtParams.room=cast(theRoom, MMORoom);
 		
-		sfs.dispatchEvent(new SFSEvent(SFSEvent.PROXIMITY_LIST_UPDATE, evtParams));
+		sfs.dispatchSFSEvent(SFSEvent.PROXIMITY_LIST_UPDATE, evtParams);
 	}
 	
 	private function fnSetMMOItemVariables(msg:IMessage):Void
@@ -1547,7 +1546,7 @@ class SystemController extends BaseController
 				evtParams.mmoItem=mmoItem;
 				evtParams.room=mmoRoom;
 				
-				sfs.dispatchEvent(new SFSEvent(SFSEvent.MMOITEM_VARIABLES_UPDATE, evtParams));					
+				sfs.dispatchSFSEvent(SFSEvent.MMOITEM_VARIABLES_UPDATE, evtParams);					
 			}
 		}
 	}

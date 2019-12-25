@@ -1,5 +1,6 @@
 package com.smartfoxserver.v2.core;
 
+import lime.utils.ObjectPool;
 import haxe.DynamicAccess;
 import openfl.events.Event;
 
@@ -1665,6 +1666,8 @@ class SFSEvent extends BaseEvent
 	
 	
 	//==========================================================================================================
+
+	@:noCompletion public static var __pool:ObjectPool<SFSEvent> = new ObjectPool<SFSEvent>(function() return new SFSEvent(null, null), function(event) event.pool_clean());
 	
 	
 	/**
@@ -1703,6 +1706,18 @@ class SFSEvent extends BaseEvent
 	function get_parameters():DynamicAccess<Dynamic>
 	{
 		return this.params;
+	}
+
+	@:noCompletion private function pool_clean():Void
+	{
+		super.__init();
+		params = null;
+	}
+
+	@:noCompletion  public function pool_init(type:String, params:Dynamic) {
+		this.type = type;
+		this.params = params;
+		return this;
 	}
 	
 }

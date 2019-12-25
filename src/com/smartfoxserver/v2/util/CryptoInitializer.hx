@@ -84,18 +84,18 @@ class CryptoInitializer
 		
 		sfs.socketEngine.cryptoKey = new CryptoKey(iv, key);
 		
-		sfs.dispatchEvent( new SFSEvent(SFSEvent.CRYPTO_INIT, { success:true }) );
+		sfs.dispatchSFSEvent(SFSEvent.CRYPTO_INIT, { success:true });
 	}
 		
 	private function onHttpIOError(evt:IOErrorEvent):Void
 	{
 		sfs.logger.warn("HTTP I/O ERROR: " + evt.text);
-		sfs.dispatchEvent( new SFSEvent(SFSEvent.CRYPTO_INIT, { success:false, errorMsg:evt.text }) );
+		sfs.dispatchSFSEvent(SFSEvent.CRYPTO_INIT, { success:false, errorMsg:evt.text });
 	}
 	
 	private function onSecurityError(evt:SecurityErrorEvent):Void
 	{
 		sfs.logger.warn("SECURITY ERROR: " + evt.text);
-		sfs.dispatchEvent( new SFSEvent(SFSEvent.CRYPTO_INIT, { success:false, errorMsg:evt.text }) );
+		sfs.dispatchSFSEvent(SFSEvent.CRYPTO_INIT, { success:false, errorMsg:evt.text });
 	}
 }

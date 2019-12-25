@@ -2039,17 +2039,17 @@ class SmartFox extends EventDispatcher
 	private function onSocketClose(evt:BitSwarmEvent):Void
 	{
 		reset();
-		dispatchEvent(new SFSEvent(SFSEvent.CONNECTION_LOST, { reason:evt.params.reason } ));
+		dispatchSFSEvent(SFSEvent.CONNECTION_LOST, { reason:evt.params.reason } );
 	}
 	
 	private function onSocketReconnectionTry(evt:BitSwarmEvent):Void
 	{
-		dispatchEvent(new SFSEvent(SFSEvent.CONNECTION_RETRY, { } ));
+		dispatchSFSEvent(SFSEvent.CONNECTION_RETRY, { } );
 	}
 	
 	private function onSocketDataError(evt:BitSwarmEvent):Void
 	{
-		dispatchEvent(new SFSEvent(SFSEvent.SOCKET_ERROR, { errorMessage:evt.params.message, details:evt.params.details } ));
+		dispatchSFSEvent(SFSEvent.SOCKET_ERROR, { errorMessage:evt.params.message, details:evt.params.details } );
 	}
 	
 	private function onSocketIOError(evt:BitSwarmEvent):Void
@@ -2124,8 +2124,8 @@ class SmartFox extends EventDispatcher
 				* We can safely assume that reconnection was performed correctly at this point
 				* In case of failure the server will disconnect the temp socket.
 				*/
-				
-				dispatchEvent(new SFSEvent(SFSEvent.CONNECTION_RESUME, { } ));
+
+				dispatchSFSEvent(SFSEvent.CONNECTION_RESUME, { } );
 			}
 			else
 			{
@@ -2133,7 +2133,7 @@ class SmartFox extends EventDispatcher
 				* Regular connection success
 				*/
 				_isConnecting = false; // reset flag
-				dispatchEvent(new SFSEvent(SFSEvent.CONNECTION, { success:true } ));
+				dispatchSFSEvent(SFSEvent.CONNECTION, { success:true } );
 			}
 		}
 		
@@ -2143,8 +2143,8 @@ class SmartFox extends EventDispatcher
 			var errorCd:Int = obj.getShort(BaseRequest.KEY_ERROR_CODE);
 			var errorMsg:String = SFSErrorCodes.getErrorMessage(errorCd, obj.getUtfStringArray(BaseRequest.KEY_ERROR_PARAMS));
 			var params:Dynamic = { success:false, errorMessage:errorMsg, errorCode:errorCd };
-			
-			dispatchEvent(new SFSEvent(SFSEvent.CONNECTION, params));
+
+			dispatchSFSEvent(SFSEvent.CONNECTION, params);
 		}			
 	}
 	
@@ -2205,15 +2205,15 @@ class SmartFox extends EventDispatcher
 			var bbPort:Int = config != null ? config.httpPort:DEFAULT_HTTP_PORT;
 				
 			_bitSwarm.connect(_lastIpAddress, bbPort);
-				
-			dispatchEvent(new SFSEvent(SFSEvent.CONNECTION_ATTEMPT_HTTP, { } ));
+
+			dispatchSFSEvent(SFSEvent.CONNECTION_ATTEMPT_HTTP, { } );
 		}
 		
 		// Connection failed
 		else
 		{
 			var params:Dynamic = { success:false, errorMessage:evt.params.message };
-			dispatchEvent(new SFSEvent(SFSEvent.CONNECTION, params));
+			dispatchSFSEvent(SFSEvent.CONNECTION, params);
 			_isConnecting = _isConnected = false;
 		}
 		
@@ -2246,4 +2246,15 @@ class SmartFox extends EventDispatcher
 		// Store globally
 		_config = cfgData;
 	}
+	public function dispatchSFSEvent(type:String, params:Dynamic) {
+		#if !sfs_disable_event_pooling
+		var event = SFSEvent.__pool.get().pool_init(type, params);
+		dispatchEvent(event);
+		SFSEvent.__pool.release(event);
+		#else
+		dispatchEvent(new SFSEvent(type, params)); 
+		#end
+		
+	}
+	
 }

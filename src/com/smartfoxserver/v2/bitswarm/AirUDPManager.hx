@@ -245,7 +245,7 @@ class AirUDPManager implements IUDPManager
 				
 			var evtParams:Dynamic = { };
 			evtParams.success = true;
-			_sfs.dispatchEvent(new SFSEvent(SFSEvent.UDP_INIT, evtParams));
+			_sfs.dispatchSFSEvent(SFSEvent.UDP_INIT, evtParams);
 				
 			return
 		}
@@ -312,7 +312,7 @@ class AirUDPManager implements IUDPManager
 			evtParams.success=false;
 			
 			// Fire failure event
-			_sfs.dispatchEvent(new SFSEvent(SFSEvent.UDP_INIT, evtParams));
+			_sfs.dispatchSFSEvent(SFSEvent.UDP_INIT, evtParams);
 		}
 	}
 }
