@@ -1,10 +1,12 @@
 package com.smartfoxserver.v2.requests.buddylist;
+import com.smartfoxserver.v2.exceptions.SFSValidationError;
 import com.smartfoxserver.v2.entities.Buddy;
 import com.smartfoxserver.v2.entities.data.ISFSObject;
 
 
 import com.smartfoxserver.v2.requests.GenericMessageRequest;
 import com.smartfoxserver.v2.requests.GenericMessageType;
+import com.smartfoxserver.v2.requests.GenericMessageRequest.*;
 
 /**
  * Sends a message to a buddy in the current user's buddies list.
@@ -49,8 +51,11 @@ import com.smartfoxserver.v2.requests.GenericMessageType;
  * @see		com.smartfoxserver.v2.SmartFox#event:buddyMessage buddyMessage event
  * @see		InitBuddyListRequest
  */
-class BuddyMessageRequest extends GenericMessageRequest
-{
+class BuddyMessageRequest extends GenericMessageRequest {
+
+	/** @exclude */
+	private var _recipient:Int;
+	
 	/**
 	 * Creates a new<em>BuddyMessageRequest</em>instance.
 	 * The instance must be passed to the<em>SmartFox.send()</em>method for the request to be performed.
@@ -62,12 +67,44 @@ class BuddyMessageRequest extends GenericMessageRequest
 	 * @see		com.smartfoxserver.v2.SmartFox#send()SmartFox.send()
 	 * @see		com.smartfoxserver.v2.entities.data.SFSObject SFSObject
 	 */
-	public function new(message:String, targetBuddy:Buddy, params:ISFSObject=null)
-	{
+	public function new(message:String, targetBuddy:Buddy, params:ISFSObject = null) {
 		super();
 		_type = GenericMessageType.BUDDY_MSG;
 		_message = message;
-		_recipient = targetBuddy != null ? targetBuddy.id: -1;
+		_recipient = targetBuddy != null ? targetBuddy.id : -1;
 		_params = params;
+	}
+
+	override public function validate(sfs:SmartFox):Void {
+		var errors:Array<String>=[];
+		
+		if (!sfs.buddyManager.isInited)
+			errors.push("BuddyList is not inited. Please send an InitBuddyRequest first.");
+
+		if (sfs.buddyManager.myOnlineState == false)
+			errors.push("Can't send messages while off-line");
+
+		if (_message == null || _message.length == 0)
+			errors.push("Buddy message is empty!");
+
+		if (_recipient < 0)
+			errors.push("Recipient is not online or not in your buddy list");
+
+		if(errors.length>0)
+			throw new SFSValidationError("Request error - ", errors);
+	}
+
+	override public function execute(sfs:SmartFox):Void
+	{
+		_sfso.putByte(KEY_MESSAGE_TYPE, _type);
+		// Id of the recipient buddy
+		_sfso.putInt(KEY_RECIPIENT, _recipient);
+
+		// Message
+		_sfso.putUtfString(KEY_MESSAGE, _message);
+
+		// Params
+		if(_params !=null)
+			_sfso.putSFSObject(KEY_XTRA_PARAMS, _params);
 	}
 }

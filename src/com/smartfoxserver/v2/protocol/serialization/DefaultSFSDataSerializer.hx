@@ -490,7 +490,7 @@ class DefaultSFSDataSerializer implements ISFSDataSerializer
 	private function binDecode_BOOL_ARRAY(buffer:ByteArray):SFSDataWrapper
 	{
 		var size:Int = getTypedArraySize(buffer);
-		var array:Array<Dynamic> = [];
+		var array:Array<Bool> = [];
 		
 		for(j in 0...size)
 		{
@@ -518,7 +518,7 @@ class DefaultSFSDataSerializer implements ISFSDataSerializer
 	private function binDecode_SHORT_ARRAY(buffer:ByteArray):SFSDataWrapper
 	{
 		var size:Int = getTypedArraySize(buffer);
-		var array:Array<Dynamic> = [];
+		var array:Array<Int> = [];
 		
 		for(j in 0...size)
 		{
@@ -531,7 +531,7 @@ class DefaultSFSDataSerializer implements ISFSDataSerializer
 	private function binDecode_INT_ARRAY(buffer:ByteArray):SFSDataWrapper
 	{
 		var size:Int = getTypedArraySize(buffer);
-		var array:Array<Dynamic> = [];
+		var array:Array<Int> = [];
 		
 		for(j in 0...size)
 		{
@@ -544,7 +544,7 @@ class DefaultSFSDataSerializer implements ISFSDataSerializer
 	private function binDecode_LONG_ARRAY(buffer:ByteArray):SFSDataWrapper
 	{
 		var size:Int = getTypedArraySize(buffer);
-		var array:Array<Dynamic> = [];
+		var array:Array<Float> = [];
 		
 		for(j in 0...size)
 		{
@@ -557,7 +557,7 @@ class DefaultSFSDataSerializer implements ISFSDataSerializer
 	private function binDecode_FLOAT_ARRAY(buffer:ByteArray):SFSDataWrapper
 	{
 		var size:Int = getTypedArraySize(buffer);
-		var array:Array<Dynamic> = [];
+		var array:Array<Float> = [];
 		
 		for(j in 0...size)
 		{
@@ -570,7 +570,7 @@ class DefaultSFSDataSerializer implements ISFSDataSerializer
 	private function binDecode_DOUBLE_ARRAY(buffer:ByteArray):SFSDataWrapper
 	{
 		var size:Int = getTypedArraySize(buffer);
-		var array:Array<Dynamic> = [];
+		var array:Array<Float> = [];
 		
 		for(j in 0...size)
 		{
@@ -583,7 +583,7 @@ class DefaultSFSDataSerializer implements ISFSDataSerializer
 	private function binDecode_UTF_STRING_ARRAY(buffer:ByteArray):SFSDataWrapper
 	{
 		var size:Int = getTypedArraySize(buffer);
-		var array:Array<Dynamic> = [];
+		var array:Array<String> = [];
 		
 		for(j in 0...size)
 		{
@@ -1135,7 +1135,7 @@ class DefaultSFSDataSerializer implements ISFSDataSerializer
 	
 	private function _scanSFSObject(sfso:ISFSObject, obj:Dynamic):Void
 	{
-		var keys:Array<Dynamic>=sfso.getKeys();
+		var keys:Array<String> = sfso.getKeys();
 		
 		for(key in keys)
 		{

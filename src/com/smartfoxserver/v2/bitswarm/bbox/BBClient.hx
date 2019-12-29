@@ -165,14 +165,14 @@ class BBClient extends EventDispatcher
 	
 	private function onHttpResponse(evt:Event):Void
 	{
-		var loader:URLLoader=cast evt.target;
-		var rawData:String=cast loader.data;
+		var loader:URLLoader = cast evt.target;
+		var rawData:String = cast loader.data;
 		
 		if(_debug)
 			trace("[ BB-Receive ]:" + rawData);
 		
 		// Obtain splitted params
-		var reqBits:Array<Dynamic>=rawData.split(SEP);
+		var reqBits = rawData.split(SEP);
 		
 		var cmd:String=reqBits[0];
 		var data:String=reqBits[1];

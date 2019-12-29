@@ -192,7 +192,7 @@ class AirUDPManager implements IUDPManager
 	//::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 	private function onUDPData(evt:DatagramSocketDataEvent):Void
 	{
-		var bytes:ByteArray<Dynamic> = cast evt.data;
+		var bytes:ByteArray = cast evt.data;
 		
 		// Not enough data!
 		if(bytes.bytesAvailable<4)
@@ -209,7 +209,7 @@ class AirUDPManager implements IUDPManager
 		
 		// Get the compression flag
 		var compressed:Bool = (header & 0x20) > 0;
-		var encrypted:Boolean = (header & 0x40) > 0;
+		var encrypted:Bool = (header & 0x40) > 0;
 		
 		// Read the size of message(UDP can only use the short version)
 		var dataSize:Int=bytes.readShort();
@@ -221,7 +221,7 @@ class AirUDPManager implements IUDPManager
 		}
 		
 		// Grab the message body and deserialize it
-		var objBytes:ByteArray= new ByteArray();
+		var objBytes:ByteArray = new ByteArray();
 		objBytes.endian = Endian.BIG_ENDIAN;
 		bytes.readBytes(objBytes, 0, bytes.bytesAvailable);
 		
@@ -233,7 +233,7 @@ class AirUDPManager implements IUDPManager
 		if (compressed)
 			objBytes.uncompress();
 		
-		var reqObj:ISFSObject = SFSObject.newFromBinaryData(objBytes);
+		var reqObj = SFSObject.newFromBinaryData(objBytes);
 
 		// Check if this is an UDP Handshake response. If so, fire event and stop here.
 		if(reqObj.containsKey("h"))
@@ -247,11 +247,11 @@ class AirUDPManager implements IUDPManager
 			evtParams.success = true;
 			_sfs.dispatchSFSEvent(SFSEvent.UDP_INIT, evtParams);
 				
-			return
+			return;
 		}
 		
 		// Hand it to the ProtocolCodec
-		_sfs.socketEngine.ioHandler.codec.onPacketRead(reqObj);
+		_sfs.socketEngine.ioHandler.codec.onPacketRead(objBytes);
 	}
 	
 	private function onUDPError(evt:IOErrorEvent):Void
@@ -268,7 +268,7 @@ class AirUDPManager implements IUDPManager
 		message.putLong("i", nextUdpPacketId());
 		message.putInt("u", _sfs.mySelf.id);
 		
-		var binData:ByteArray<Dynamic>=message.toBinary();
+		var binData:ByteArray = message.toBinary();
 		//var compress:Bool=false;
 		
 		// Assemble SFS2X packet

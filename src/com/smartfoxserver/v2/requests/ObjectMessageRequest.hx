@@ -1,7 +1,11 @@
 package com.smartfoxserver.v2.requests;
 
+import openfl.errors.ArgumentError;
+import com.smartfoxserver.v2.exceptions.SFSValidationError;
+import com.smartfoxserver.v2.entities.User;
 import com.smartfoxserver.v2.entities.Room;
 import com.smartfoxserver.v2.entities.data.ISFSObject;
+import com.smartfoxserver.v2.requests.GenericMessageRequest.*;
 
 /**
  * Sends an object containing custom data to all users in a Room, or a subset of them.
@@ -39,8 +43,11 @@ import com.smartfoxserver.v2.entities.data.ISFSObject;
  * 
  * @see		com.smartfoxserver.v2.SmartFox#event:objectMessage objectMessage event
  */
-class ObjectMessageRequest extends GenericMessageRequest
-{
+class ObjectMessageRequest extends GenericMessageRequest {
+
+	/** @exclude */
+	private var _recipients:Array<User>;
+	
 	/**
 	 * Creates a new<em>ObjectMessageRequest</em>instance.
 	 * The instance must be passed to the<em>SmartFox.send()</em>method for the request to be performed.
@@ -53,12 +60,57 @@ class ObjectMessageRequest extends GenericMessageRequest
 	 * @see		com.smartfoxserver.v2.entities.data.SFSObject SFSObject
 	 * @see		com.smartfoxserver.v2.entities.User User
 	 */
-	public function new(obj:ISFSObject, targetRoom:Room=null, recipients:Array<Dynamic>=null)
-	{
+	public function new(obj:ISFSObject, targetRoom:Room = null, recipients:Array<User> = null) {
 		super();
-		_type=GenericMessageType.OBJECT_MSG;
-		_params=obj;
-		_room=targetRoom;
-		_recipient=recipients;
+		_type = GenericMessageType.OBJECT_MSG;
+		_params = obj;
+		_room = targetRoom;
+		_recipients = recipients;
 	}
+
+	override public function validate(sfs:SmartFox):Void {
+		var errors:Array<String> = [];
+		
+		if (_params == null)
+			errors.push("Object message is null!");
+		
+		if (errors.length > 0)
+			throw new SFSValidationError("Request error - ", errors);
+	}
+
+	override public function execute(sfs:SmartFox):Void
+	{
+		_sfso.putByte(KEY_MESSAGE_TYPE, _type);
+		// No room aws passed, let's use the last joined one
+		if(_room==null)
+			_room = sfs.lastJoinedRoom;
+
+		// Populate a recipient list, no duplicates allowed
+		var recipients:Map<Int,Bool> = new Map<Int,Bool>();
+
+
+		// Check that recipient list is not bigger than the Room capacity 
+		if(_recipients.length>_room.capacity)
+			throw new ArgumentError("The number of recipients is bigger than the target Room capacity:" + _recipients.length);
+
+		for (item in _recipients) {
+			recipients.set(item.id, true);
+		}
+
+		
+
+		_sfso.putInt(KEY_ROOM_ID, _room.id);
+		_sfso.putSFSObject(KEY_XTRA_PARAMS, _params);
+
+		var r = [];
+		for (k in recipients.keys())
+		{
+			r.push(k);
+		}
+
+		// Optional user list
+		if(r.length>0)
+			_sfso.putIntArray(KEY_RECIPIENT, r);
+	}
+	
 }

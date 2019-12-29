@@ -1,5 +1,6 @@
 package com.smartfoxserver.v2.core;
 
+import openfl.utils.ByteArray;
 import com.smartfoxserver.v2.bitswarm.BitSwarmClient;
 import com.smartfoxserver.v2.bitswarm.IController;
 import com.smartfoxserver.v2.bitswarm.IMessage;
@@ -32,7 +33,7 @@ class SFSProtocolCodec implements IProtocolCodec
 		this.log = bitSwarm.sfs.logger;
 	}
 	
-	public function onPacketRead(packet:Dynamic):Void
+	public function onPacketRead(packet:ByteArray):Void
 	{		
 		var sfsObj:ISFSObject = null;
 			

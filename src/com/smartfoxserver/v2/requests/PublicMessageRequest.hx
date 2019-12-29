@@ -1,8 +1,11 @@
 package com.smartfoxserver.v2.requests;
 
 
+import com.smartfoxserver.v2.exceptions.SFSError;
+import com.smartfoxserver.v2.exceptions.SFSValidationError;
 import com.smartfoxserver.v2.entities.Room;
 import com.smartfoxserver.v2.entities.data.ISFSObject;
+import com.smartfoxserver.v2.requests.GenericMessageRequest.*;
 
 /**
  * Sends a public chat message.
@@ -44,8 +47,7 @@ import com.smartfoxserver.v2.entities.data.ISFSObject;
  * @see		com.smartfoxserver.v2.SmartFox#event:publicMessage publicMessage event
  * @see		RoomSettings#permissions RoomSettings.permissions
  */
-class PublicMessageRequest extends GenericMessageRequest
-{
+class PublicMessageRequest extends GenericMessageRequest {
 	/**
 	 * Creates a new<em>PublicMessageRequest</em>instance.
 	 * The instance must be passed to the<em>SmartFox.send()</em>method for the request to be performed.
@@ -57,13 +59,44 @@ class PublicMessageRequest extends GenericMessageRequest
 	 * @see		com.smartfoxserver.v2.SmartFox#send()SmartFox.send()
 	 * @see		com.smartfoxserver.v2.entities.data.SFSObject SFSObject
 	 */
-	public function new(message:String, params:ISFSObject=null, targetRoom:Room=null)
-	{
+	public function new(message:String, params:ISFSObject = null, targetRoom:Room = null) {
 		super();
-		
+
 		_type = GenericMessageType.PUBLIC_MSG;
 		_message = message;
 		_room = targetRoom;
 		_params = params;
-	}		
+	}
+
+	override public function validate(sfs:SmartFox):Void {
+		var errors:Array<String>=[];
+		
+		if (_message == null || _message.length == 0)
+			errors.push("Public message is empty!");
+
+		if (_room != null && sfs.joinedRooms.indexOf(_room) < 0)
+			errors.push("You are not joined in the target Room:" + _room);
+
+		if(errors.length>0)
+			throw new SFSValidationError("Request error - ", errors);
+	}
+
+	override public function execute(sfs:SmartFox):Void
+	{
+		_sfso.putByte(KEY_MESSAGE_TYPE, _type);
+		// No room was passed, let's use the last joined one
+		if(_room==null)
+			_room = sfs.lastJoinedRoom;
+
+		// If it doesn't exist we have a problem
+		if(_room==null)
+			throw new SFSError("User should be joined in a room in order to send a public message");
+
+		_sfso.putInt(KEY_ROOM_ID, _room.id);
+		_sfso.putInt(KEY_USER_ID, sfs.mySelf.id);
+		_sfso.putUtfString(KEY_MESSAGE, _message);
+
+		if(_params !=null)
+			_sfso.putSFSObject(KEY_XTRA_PARAMS, _params);
+	}
 }

@@ -1,8 +1,12 @@
 package com.smartfoxserver.v2.requests;
 
+import com.smartfoxserver.v2.entities.User;
+import com.smartfoxserver.v2.entities.Room;
+import com.smartfoxserver.v2.exceptions.SFSValidationError;
 import com.smartfoxserver.v2.entities.data.ISFSObject;
 import com.smartfoxserver.v2.requests.GenericMessageRequest;
 import com.smartfoxserver.v2.requests.MessageRecipientMode;
+import com.smartfoxserver.v2.requests.GenericMessageRequest.*;
 import openfl.errors.ArgumentError;
 /**
  * Sends an administrator message to a specific user or a group of users.
@@ -36,8 +40,12 @@ import openfl.errors.ArgumentError;
  * @see		com.smartfoxserver.v2.entities.User#privilegeId User.privilegeId
  * @see		ModeratorMessageRequest
  */
-class AdminMessageRequest extends GenericMessageRequest
-{
+class AdminMessageRequest extends GenericMessageRequest {
+
+	/** @exclude */
+	private var _recipient:Any;
+
+	
 	/**
 	 * Creates a new<em>AdminMessageRequest</em>instance.
 	 * The instance must be passed to the<em>SmartFox.send()</em>method for the request to be performed.
@@ -49,15 +57,67 @@ class AdminMessageRequest extends GenericMessageRequest
 	 * @see		com.smartfoxserver.v2.SmartFox#send()SmartFox.send()
 	 * @see		com.smartfoxserver.v2.entities.data.SFSObject SFSObject
 	 */
-	public function new(message:String, recipientMode:MessageRecipientMode, params:ISFSObject=null)
-	{
-		if(recipientMode==null)
+	public function new(message:String, recipientMode:MessageRecipientMode, params:ISFSObject = null) {
+		if (recipientMode == null)
 			throw new ArgumentError("RecipientMode cannot be null!");
-		
-		_type=GenericMessageType.ADMING_MSG;
-		_message=message;
-		_params=params;
-		_recipient=recipientMode.target;
-		_sendMode=recipientMode.mode;
+
+		_type = GenericMessageType.ADMING_MSG;
+		_message = message;
+		_params = params;
+		_recipient = recipientMode.target;
+		_sendMode = recipientMode.mode;
 	}
+
+	override public function validate(sfs:SmartFox):Void {
+		var errors:Array<String> = [];
+
+		if (_message == null || _message.length == 0)
+			errors.push("Administrator message is empty!");
+
+		switch(_sendMode)
+		{
+			case MessageRecipientMode.TO_USER:
+				if (!(Std.is(_recipient, User)))
+					errors.push("TO_USER expects a User object as recipient");
+
+			case MessageRecipientMode.TO_ROOM:
+				if (!(Std.is(_recipient, Room)))
+					errors.push("TO_ROOM expects a Room object as recipient");
+
+			case MessageRecipientMode.TO_GROUP:
+				if (!(Std.is(_recipient, String)))
+					errors.push("TO_GROUP expects a String object(the groupId)as recipient");
+		}
+		if (errors.length > 0)
+			throw new SFSValidationError("Request error - ", errors);
+	}
+
+	override public function execute(sfs:SmartFox):Void {
+		_sfso.putByte(KEY_MESSAGE_TYPE, _type);
+		_sfso.putUtfString(KEY_MESSAGE, _message);
+
+		if (_params != null)
+			_sfso.putSFSObject(KEY_XTRA_PARAMS, _params);
+
+		_sfso.putInt(KEY_RECIPIENT_MODE, _sendMode);
+
+		switch(_sendMode)
+		{
+			// Put the User.id as Int
+			case MessageRecipientMode.TO_USER:
+				_sfso.putInt(KEY_RECIPIENT, _recipient.id);
+
+			// Put the Room.id as Int
+			case MessageRecipientMode.TO_ROOM:
+				_sfso.putInt(KEY_RECIPIENT, _recipient.id);
+
+			// Put the Room Group as String
+			case MessageRecipientMode.TO_GROUP:
+				_sfso.putUtfString(KEY_RECIPIENT, _recipient);
+
+			// the TO_ZONE case does not need to pass any other params
+		}
+	}
+
+
 }

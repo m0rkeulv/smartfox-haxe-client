@@ -1,5 +1,6 @@
 package com.smartfoxserver.v2.core;
 
+import openfl.events.EventType;
 import lime.utils.ObjectPool;
 import haxe.DynamicAccess;
 import openfl.events.Event;
@@ -55,7 +56,7 @@ class SFSEvent extends BaseEvent
 
 {
 	/** @private */
-	public static inline var HANDSHAKE:String = "handshake";
+	public static inline var HANDSHAKE:EventType<SFSEvent> = "handshake";
 	
 	/**
 	 * The<em>SFSEvent.UDP_INIT</em>constant defines the value of the<em>type</em>property of the event object for a<em>udpInit</em>event.
@@ -92,7 +93,7 @@ class SFSEvent extends BaseEvent
 	 * 
 	 * @eventType	udpInit
 	 */
-	public static inline var UDP_INIT:String = "udpInit";
+	public static inline var UDP_INIT:EventType<SFSEvent> = "udpInit";
 	
 	/**
 	 * The<em>SFSEvent.CONNECTION</em>constant defines the value of the<em>type</em>property of the event object for a<em>connection</em>event.
@@ -129,7 +130,7 @@ class SFSEvent extends BaseEvent
 	 * @see		#CONNECTION_RESUME
 	 * @see		#CONNECTION_LOST
 	 */
-	public static inline var CONNECTION:String = "connection";
+	public static inline var CONNECTION:EventType<SFSEvent> = "connection";
 	
 	/**
 	 * The<em>SFSEvent.PING_PONG</em>constant defines the value of the<em>type</em>property of the event object for a<em>pingPong</em>event.
@@ -140,7 +141,7 @@ class SFSEvent extends BaseEvent
 	 *<tr><td>lagValue</td><td><em>int</em></td><td>The average of the last ten measured lag values, expressed in milliseconds.</td></tr>
 	 *</table>
 	 */
-	public static inline var PING_PONG:String = "pingPong";
+	public static inline var PING_PONG:EventType<SFSEvent> = "pingPong";
 		
 	/**
 	 * The<em>SFSEvent.SOCKET_ERROR</em>constant defines the value of the<em>type</em>property of the event object for a<em>socketError</em>event.
@@ -151,7 +152,7 @@ class SFSEvent extends BaseEvent
 	 *<tr><td>errorMessage</td><td><em>String</em></td><td>The description of the error.</td></tr>
 	 *</table>
 	 */
-	public static inline var SOCKET_ERROR:String = "socketError";
+	public static inline var SOCKET_ERROR:EventType<SFSEvent> = "socketError";
 		
 	/**
 	 * The<em>SFSEvent.CONNECTION_LOST</em>constant defines the value of the<em>type</em>property of the event object for a<em>connectionLost</em>event.
@@ -198,7 +199,7 @@ class SFSEvent extends BaseEvent
 	 * @see		#CONNECTION
 	 * @see		#CONNECTION_RETRY
 	 */
-	public static inline var CONNECTION_LOST:String = "connectionLost";
+	public static inline var CONNECTION_LOST:EventType<SFSEvent> = "connectionLost";
 	
 	/**
 	 * The<em>SFSEvent.CONNECTION_RETRY</em>constant defines the value of the<em>type</em>property of the event object for a<em>connectionRetry</em>event.
@@ -238,7 +239,7 @@ class SFSEvent extends BaseEvent
 	 * @see		#CONNECTION_RESUME
 	 * @see		#CONNECTION_LOST
 	 */
-	public static inline var CONNECTION_RETRY:String = "connectionRetry";
+	public static inline var CONNECTION_RETRY:EventType<SFSEvent> = "connectionRetry";
 	
 	/**
 	 * The<em>SFSEvent.CONNECTION_RESUME</em>constant defines the value of the<em>type</em>property of the event object for a<em>connectionResume</em>event.
@@ -252,7 +253,7 @@ class SFSEvent extends BaseEvent
 	 * @see		#CONNECTION_RETRY
 	 * @see		#CONNECTION_LOST
 	 */
-	public static inline var CONNECTION_RESUME:String = "connectionResume";
+	public static inline var CONNECTION_RESUME:EventType<SFSEvent> = "connectionResume";
 		
 	/**
 	 * The<em>SFSEvent.CONNECTION_ATTEMPT_HTTP</em>constant defines the value of the<em>type</em>property of the event object for a<em>connectionAttemptHttp</em>event.
@@ -266,7 +267,7 @@ class SFSEvent extends BaseEvent
 	 * @see		#CONNECTION
 	 * @see		#CONNECTION_LOST
 	 */	
-	public static inline var CONNECTION_ATTEMPT_HTTP:String = "connectionAttemptHttp";
+	public static inline var CONNECTION_ATTEMPT_HTTP:EventType<SFSEvent> = "connectionAttemptHttp";
 	
 	/**
 	 * The<em>SFSEvent.CONFIG_LOAD_SUCCESS</em>constant defines the value of the<em>type</em>property of the event object for a<em>configLoadSuccess</em>event.
@@ -302,7 +303,7 @@ class SFSEvent extends BaseEvent
 	 * 
 	 * @see		#CONFIG_LOAD_FAILURE
 	 */
-	public static inline var CONFIG_LOAD_SUCCESS:String = "configLoadSuccess";
+	public static inline var CONFIG_LOAD_SUCCESS:EventType<SFSEvent> = "configLoadSuccess";
 	
 	/**
 	 * The<em>SFSEvent.CONFIG_LOAD_FAILURE</em>constant defines the value of the<em>type</em>property of the event object for a<em>configLoadFailure</em>event.
@@ -315,7 +316,7 @@ class SFSEvent extends BaseEvent
 	 * 
 	 * @see		#CONFIG_LOAD_SUCCESS
 	 */
-	public static inline var CONFIG_LOAD_FAILURE:String = "configLoadFailure";
+	public static inline var CONFIG_LOAD_FAILURE:EventType<SFSEvent> = "configLoadFailure";
 	
 	/**
 	 * The<em>SFSEvent.LOGIN</em>constant defines the value of the<em>type</em>property of the event object for a<em>login</em>event.
@@ -355,7 +356,7 @@ class SFSEvent extends BaseEvent
 	 * @see		#LOGIN_ERROR
 	 * @see		#LOGOUT
 	 */
-	public static inline var LOGIN:String = "login";
+	public static inline var LOGIN:EventType<SFSEvent> = "login";
 	
 	/**
 	 * The<em>SFSEvent.LOGIN_ERROR</em>constant defines the value of the<em>type</em>property of the event object for a<em>loginError</em>event.
@@ -373,7 +374,7 @@ class SFSEvent extends BaseEvent
 	 * 
 	 * @see		#LOGIN
 	 */
-	public static inline var LOGIN_ERROR:String = "loginError";
+	public static inline var LOGIN_ERROR:EventType<SFSEvent> = "loginError";
 	
 	/**
 	 * The<em>SFSEvent.LOGOUT</em>constant defines the value of the<em>type</em>property of the event object for a<em>logout</em>event.
@@ -401,7 +402,7 @@ class SFSEvent extends BaseEvent
 	 * 
 	 * @see		#LOGIN
 	 */
-	public static inline var LOGOUT:String = "logout";
+	public static inline var LOGOUT:EventType<SFSEvent> = "logout";
 	
 	/**
 	 * The<em>SFSEvent.ROOM_ADD</em>constant defines the value of the<em>type</em>property of the event object for a<em>roomAdd</em>event.
@@ -445,7 +446,7 @@ class SFSEvent extends BaseEvent
 	 * @see		#ROOM_REMOVE
 	 * @see		#ROOM_CREATION_ERROR
 	 */
-	public static inline var ROOM_ADD:String = "roomAdd";
+	public static inline var ROOM_ADD:EventType<SFSEvent> = "roomAdd";
 	
 	/**
 	 * The<em>SFSEvent.ROOM_REMOVE</em>constant defines the value of the<em>type</em>property of the event object for a<em>roomRemove</em>event.
@@ -474,7 +475,7 @@ class SFSEvent extends BaseEvent
 	 * 
 	 * @see		#ROOM_ADD
 	 */
-	public static inline var ROOM_REMOVE:String = "roomRemove";
+	public static inline var ROOM_REMOVE:EventType<SFSEvent> = "roomRemove";
 	
 	/**
 	 * The<em>SFSEvent.ROOM_CREATION_ERROR</em>constant defines the value of the<em>type</em>property of the event object for a<em>roomCreationError</em>event.
@@ -492,7 +493,7 @@ class SFSEvent extends BaseEvent
 	 * 
 	 * @see		#ROOM_ADD
 	 */
-	public static inline var ROOM_CREATION_ERROR:String = "roomCreationError";
+	public static inline var ROOM_CREATION_ERROR:EventType<SFSEvent> = "roomCreationError";
 	
 	//public static var ROOM_LIST_UPDATE:String="roomListUpdate"
 	
@@ -532,7 +533,7 @@ class SFSEvent extends BaseEvent
 	 * 
 	 * @see		#ROOM_JOIN_ERROR
 	 */
-	public static inline var ROOM_JOIN:String = "roomJoin";
+	public static inline var ROOM_JOIN:EventType<SFSEvent> = "roomJoin";
 	
 	/**
 	 * The<em>SFSEvent.ROOM_JOIN_ERROR</em>constant defines the value of the<em>type</em>property of the event object for a<em>roomJoinError</em>event.
@@ -550,7 +551,7 @@ class SFSEvent extends BaseEvent
 	 * 
 	 * @see		#ROOM_JOIN
 	 */
-	public static inline var ROOM_JOIN_ERROR:String = "roomJoinError";
+	public static inline var ROOM_JOIN_ERROR:EventType<SFSEvent> = "roomJoinError";
 	
 	/**
 	 * The<em>SFSEvent.USER_ENTER_ROOM</em>constant defines the value of the<em>type</em>property of the event object for a<em>userEnterRoom</em>event.
@@ -584,7 +585,7 @@ class SFSEvent extends BaseEvent
 	 * @see		#USER_EXIT_ROOM
 	 * @see		#USER_COUNT_CHANGE
 	 */
-	public static inline var USER_ENTER_ROOM:String = "userEnterRoom";
+	public static inline var USER_ENTER_ROOM:EventType<SFSEvent> = "userEnterRoom";
 	
 	/**
 	 * The<em>SFSEvent.USER_EXIT_ROOM</em>constant defines the value of the<em>type</em>property of the event object for a<em>userExitRoom</em>event.
@@ -618,7 +619,7 @@ class SFSEvent extends BaseEvent
 	 * @see		#USER_ENTER_ROOM
 	 * @see		#USER_COUNT_CHANGE
 	 */
-	public static inline var USER_EXIT_ROOM:String = "userExitRoom";
+	public static inline var USER_EXIT_ROOM:EventType<SFSEvent> = "userExitRoom";
 	
 	/**
 	 * The<em>SFSEvent.USER_COUNT_CHANGE</em>constant defines the value of the<em>type</em>property of the event object for a<em>userCountChange</em>event.
@@ -654,7 +655,7 @@ class SFSEvent extends BaseEvent
 	 * @see		#USER_ENTER_ROOM
 	 * @see		#USER_EXIT_ROOM
 	 */
-	public static inline var USER_COUNT_CHANGE:String = "userCountChange";
+	public static inline var USER_COUNT_CHANGE:EventType<SFSEvent> = "userCountChange";
 	
 	/**
 	 * The<em>SFSEvent.PUBLIC_MESSAGE</em>constant defines the value of the<em>type</em>property of the event object for a<em>publicMessage</em>event.
@@ -697,7 +698,7 @@ class SFSEvent extends BaseEvent
 	 * 
 	 * @see		#PRIVATE_MESSAGE
 	 */
-	public static inline var PUBLIC_MESSAGE:String = "publicMessage";
+	public static inline var PUBLIC_MESSAGE:EventType<SFSEvent> = "publicMessage";
 	
 	/**
 	 * The<em>SFSEvent.PRIVATE_MESSAGE</em>constant defines the value of the<em>type</em>property of the event object for a<em>privateMessage</em>event.
@@ -738,7 +739,7 @@ class SFSEvent extends BaseEvent
 	 * 
 	 * @see		#PUBLIC_MESSAGE
 	 */
-	public static inline var PRIVATE_MESSAGE:String = "privateMessage";
+	public static inline var PRIVATE_MESSAGE:EventType<SFSEvent> = "privateMessage";
 	
 	/**
 	 * The<em>SFSEvent.OBJECT_MESSAGE</em>constant defines the value of the<em>type</em>property of the event object for a<em>objectMessage</em>event.
@@ -780,7 +781,7 @@ class SFSEvent extends BaseEvent
 	 * 
 	 * @eventType	objectMessage
 	 */
-	public static inline var OBJECT_MESSAGE:String = "objectMessage";
+	public static inline var OBJECT_MESSAGE:EventType<SFSEvent> = "objectMessage";
 	
 	/**
 	 * The<em>SFSEvent.MODERATOR_MESSAGE</em>constant defines the value of the<em>type</em>property of the event object for a<em>moderatorMessage</em>event.
@@ -817,7 +818,7 @@ class SFSEvent extends BaseEvent
 	 * 
 	 * @see		#ADMIN_MESSAGE
 	 */
-	public static inline var MODERATOR_MESSAGE:String = "moderatorMessage";
+	public static inline var MODERATOR_MESSAGE:EventType<SFSEvent> = "moderatorMessage";
 	
 	/**
 	 * The<em>SFSEvent.ADMIN_MESSAGE</em>constant defines the value of the<em>type</em>property of the event object for a<em>adminMessage</em>event.
@@ -854,7 +855,7 @@ class SFSEvent extends BaseEvent
 	 * 
 	 * @see		#MODERATOR_MESSAGE
 	 */
-	public static inline var ADMIN_MESSAGE:String = "adminMessage";
+	public static inline var ADMIN_MESSAGE:EventType<SFSEvent> = "adminMessage";
 	
 	/**
 	 * The<em>SFSEvent.EXTENSION_RESPONSE</em>constant defines the value of the<em>type</em>property of the event object for a<em>extensionResponse</em>event.
@@ -901,7 +902,7 @@ class SFSEvent extends BaseEvent
 	 * 
 	 * @eventType	extensionResponse
 	 */
-	public static inline var EXTENSION_RESPONSE:String = "extensionResponse";
+	public static inline var EXTENSION_RESPONSE:EventType<SFSEvent> = "extensionResponse";
 	
 	/**
 	 * The<em>SFSEvent.ROOM_VARIABLES_UPDATE</em>constant defines the value of the<em>type</em>property of the event object for a<em>roomVariablesUpdate</em>event.
@@ -947,7 +948,7 @@ class SFSEvent extends BaseEvent
 	 * 
 	 * @eventType	roomVariablesUpdate
 	 */
-	public static inline var ROOM_VARIABLES_UPDATE:String = "roomVariablesUpdate";
+	public static inline var ROOM_VARIABLES_UPDATE:EventType<SFSEvent> = "roomVariablesUpdate";
 	
 	/**
 	 * The<em>SFSEvent.USER_VARIABLES_UPDATE</em>constant defines the value of the<em>type</em>property of the event object for a<em>userVariablesUpdate</em>event.
@@ -992,7 +993,7 @@ class SFSEvent extends BaseEvent
 	 * 
 	 * @eventType	userVariablesUpdate
 	 */
-	public static inline var USER_VARIABLES_UPDATE:String = "userVariablesUpdate";
+	public static inline var USER_VARIABLES_UPDATE:EventType<SFSEvent> = "userVariablesUpdate";
 	
 	/**
 	 * The<em>SFSEvent.ROOM_GROUP_SUBSCRIBE</em>constant defines the value of the<em>type</em>property of the event object for a<em>roomGroupSubscribe</em>event.
@@ -1032,7 +1033,7 @@ class SFSEvent extends BaseEvent
 	 * @see		#ROOM_GROUP_SUBSCRIBE_ERROR
 	 * @see		#ROOM_GROUP_UNSUBSCRIBE
 	 */
-	public static inline var ROOM_GROUP_SUBSCRIBE:String = "roomGroupSubscribe";
+	public static inline var ROOM_GROUP_SUBSCRIBE:EventType<SFSEvent> = "roomGroupSubscribe";
 	
 	/**
 	 * The<em>SFSEvent.ROOM_GROUP_SUBSCRIBE_ERROR</em>constant defines the value of the<em>type</em>property of the event object for a<em>roomGroupSubscribeError</em>event.
@@ -1050,7 +1051,7 @@ class SFSEvent extends BaseEvent
 	 * 
 	 * @see		#ROOM_GROUP_SUBSCRIBE
 	 */
-	public static inline var ROOM_GROUP_SUBSCRIBE_ERROR:String = "roomGroupSubscribeError";
+	public static inline var ROOM_GROUP_SUBSCRIBE_ERROR:EventType<SFSEvent> = "roomGroupSubscribeError";
 	
 	/**
 	 * The<em>SFSEvent.ROOM_GROUP_UNSUBSCRIBE</em>constant defines the value of the<em>type</em>property of the event object for a<em>roomGroupUnsubscribe</em>event.
@@ -1089,7 +1090,7 @@ class SFSEvent extends BaseEvent
 	 * @see		#ROOM_GROUP_UNSUBSCRIBE_ERROR
 	 * @see		#ROOM_GROUP_SUBSCRIBE
 	 */
-	public static inline var ROOM_GROUP_UNSUBSCRIBE:String = "roomGroupUnsubscribe";
+	public static inline var ROOM_GROUP_UNSUBSCRIBE:EventType<SFSEvent> = "roomGroupUnsubscribe";
 	
 	/**
 	 * The<em>SFSEvent.ROOM_GROUP_UNSUBSCRIBE_ERROR</em>constant defines the value of the<em>type</em>property of the event object for a<em>roomGroupUnsubscribeError</em>event.
@@ -1107,7 +1108,7 @@ class SFSEvent extends BaseEvent
 	 * 
 	 * @see		#ROOM_GROUP_UNSUBSCRIBE
 	 */
-	public static inline var ROOM_GROUP_UNSUBSCRIBE_ERROR:String = "roomGroupUnsubscribeError";
+	public static inline var ROOM_GROUP_UNSUBSCRIBE_ERROR:EventType<SFSEvent> = "roomGroupUnsubscribeError";
 	
 	/**
 	 * The<em>SFSEvent.PLAYER_TO_SPECTATOR</em>constant defines the value of the<em>type</em>property of the event object for a<em>playerToSpectator</em>event.
@@ -1147,7 +1148,7 @@ class SFSEvent extends BaseEvent
 	 * @see		#PLAYER_TO_SPECTATOR_ERROR
 	 * @see		#SPECTATOR_TO_PLAYER
 	 */
-	public static inline var PLAYER_TO_SPECTATOR:String = "playerToSpectator";
+	public static inline var PLAYER_TO_SPECTATOR:EventType<SFSEvent> = "playerToSpectator";
 	
 	/**
 	 * The<em>SFSEvent.PLAYER_TO_SPECTATOR_ERROR</em>constant defines the value of the<em>type</em>property of the event object for a<em>playerToSpectatorError</em>event.
@@ -1165,7 +1166,7 @@ class SFSEvent extends BaseEvent
 	 * 
 	 * @see		#PLAYER_TO_SPECTATOR
 	 */
-	public static inline var PLAYER_TO_SPECTATOR_ERROR:String = "playerToSpectatorError";
+	public static inline var PLAYER_TO_SPECTATOR_ERROR:EventType<SFSEvent> = "playerToSpectatorError";
 	
 	/**
 	 * The<em>SFSEvent.SPECTATOR_TO_PLAYER</em>constant defines the value of the<em>type</em>property of the event object for a<em>spectatorToPlayer</em>event.
@@ -1206,7 +1207,7 @@ class SFSEvent extends BaseEvent
 	 * @see		#SPECTATOR_TO_PLAYER_ERROR
 	 * @see		#PLAYER_TO_SPECTATOR
 	 */
-	public static inline var SPECTATOR_TO_PLAYER:String = "spectatorToPlayer";
+	public static inline var SPECTATOR_TO_PLAYER:EventType<SFSEvent> = "spectatorToPlayer";
 	
 	/**
 	 * The<em>SFSEvent.SPECTATOR_TO_PLAYER_ERROR</em>constant defines the value of the<em>type</em>property of the event object for a<em>spectatorToPlayerError</em>event.
@@ -1224,7 +1225,7 @@ class SFSEvent extends BaseEvent
 	 * 
 	 * @see		#SPECTATOR_TO_PLAYER
 	 */
-	public static inline var SPECTATOR_TO_PLAYER_ERROR:String = "spectatorToPlayerError";
+	public static inline var SPECTATOR_TO_PLAYER_ERROR:EventType<SFSEvent> = "spectatorToPlayerError";
 	
 	/**
 	 * The<em>SFSEvent.ROOM_NAME_CHANGE</em>constant defines the value of the<em>type</em>property of the event object for a<em>roomNameChange</em>event.
@@ -1263,7 +1264,7 @@ class SFSEvent extends BaseEvent
 	 * 
 	 * @see		#ROOM_NAME_CHANGE_ERROR
 	 */
-	public static inline var ROOM_NAME_CHANGE:String = "roomNameChange";
+	public static inline var ROOM_NAME_CHANGE:EventType<SFSEvent> = "roomNameChange";
 	
 	/**
 	 * The<em>SFSEvent.ROOM_NAME_CHANGE_ERROR</em>constant defines the value of the<em>type</em>property of the event object for a<em>roomNameChangeError</em>event.
@@ -1281,7 +1282,7 @@ class SFSEvent extends BaseEvent
 	 * 
 	 * @see		#ROOM_NAME_CHANGE
 	 */
-	public static inline var ROOM_NAME_CHANGE_ERROR:String = "roomNameChangeError";
+	public static inline var ROOM_NAME_CHANGE_ERROR:EventType<SFSEvent> = "roomNameChangeError";
 	
 	/**
 	 * The<em>SFSEvent.ROOM_PASSWORD_STATE_CHANGE</em>constant defines the value of the<em>type</em>property of the event object for a<em>roomPasswordStateChange</em>event.
@@ -1319,7 +1320,7 @@ class SFSEvent extends BaseEvent
 	 * 
 	 * @see		#ROOM_PASSWORD_STATE_CHANGE_ERROR
 	 */
-	public static inline var ROOM_PASSWORD_STATE_CHANGE:String = "roomPasswordStateChange";
+	public static inline var ROOM_PASSWORD_STATE_CHANGE:EventType<SFSEvent> = "roomPasswordStateChange";
 	
 	/**
 	 * The<em>SFSEvent.ROOM_PASSWORD_STATE_CHANGE_ERROR</em>constant defines the value of the<em>type</em>property of the event object for a<em>roomPasswordStateChangeError</em>event.
@@ -1337,7 +1338,7 @@ class SFSEvent extends BaseEvent
 	 * 
 	 * @see		#ROOM_PASSWORD_STATE_CHANGE
 	 */
-	public static inline var ROOM_PASSWORD_STATE_CHANGE_ERROR:String = "roomPasswordStateChangeError";
+	public static inline var ROOM_PASSWORD_STATE_CHANGE_ERROR:EventType<SFSEvent> = "roomPasswordStateChangeError";
 	
 	/**
 	 * The<em>SFSEvent.ROOM_CAPACITY_CHANGE</em>constant defines the value of the<em>type</em>property of the event object for a<em>roomCapacityChange</em>event.
@@ -1377,7 +1378,7 @@ class SFSEvent extends BaseEvent
 	 * 
 	 * @see		#ROOM_CAPACITY_CHANGE_ERROR
 	 */
-	public static inline var ROOM_CAPACITY_CHANGE:String = "roomCapacityChange";
+	public static inline var ROOM_CAPACITY_CHANGE:EventType<SFSEvent> = "roomCapacityChange";
 	
 	/**
 	 * The<em>SFSEvent.ROOM_CAPACITY_CHANGE_ERROR</em>constant defines the value of the<em>type</em>property of the event object for a<em>roomCapacityChangeError</em>event.
@@ -1395,7 +1396,7 @@ class SFSEvent extends BaseEvent
 	 * 
 	 * @see		#ROOM_CAPACITY_CHANGE
 	 */
-	public static inline var ROOM_CAPACITY_CHANGE_ERROR:String = "roomCapacityChangeError";
+	public static inline var ROOM_CAPACITY_CHANGE_ERROR:EventType<SFSEvent> = "roomCapacityChangeError";
 	
 	/**
 	 * The<em>SFSEvent.ROOM_FIND_RESULT</em>constant defines the value of the<em>type</em>property of the event object for a<em>roomFindResult</em>event.
@@ -1428,7 +1429,7 @@ class SFSEvent extends BaseEvent
 	 * 
 	 * @eventType	roomFindResult
 	 */
-	public static inline var ROOM_FIND_RESULT:String = "roomFindResult";
+	public static inline var ROOM_FIND_RESULT:EventType<SFSEvent> = "roomFindResult";
 	
 	/**
 	 * The<em>SFSEvent.USER_FIND_RESULT</em>constant defines the value of the<em>type</em>property of the event object for a<em>userFindResult</em>event.
@@ -1461,7 +1462,7 @@ class SFSEvent extends BaseEvent
 	 * 
 	 * @eventType	userFindResult
 	 */
-	public static inline var USER_FIND_RESULT:String = "userFindResult";
+	public static inline var USER_FIND_RESULT:EventType<SFSEvent> = "userFindResult";
 	
 	/**
 	 * The<em>SFSEvent.INVITATION</em>constant defines the value of the<em>type</em>property of the event object for a<em>invitation</em>event.
@@ -1498,7 +1499,7 @@ class SFSEvent extends BaseEvent
 	 * 
 	 * @see		#INVITATION_REPLY
 	 */
-	public static inline var INVITATION:String = "invitation";
+	public static inline var INVITATION:EventType<SFSEvent> = "invitation";
 	
 	/**
 	 * The<em>SFSEvent.INVITATION_REPLY</em>constant defines the value of the<em>type</em>property of the event object for a<em>invitationReply</em>event.
@@ -1519,7 +1520,7 @@ class SFSEvent extends BaseEvent
 	 * @see		#INVITATION
 	 * @see		#INVITATION_REPLY_ERROR
 	 */
-	public static inline var INVITATION_REPLY:String = "invitationReply";
+	public static inline var INVITATION_REPLY:EventType<SFSEvent> = "invitationReply";
 	
 	/**
 	 * The<em>SFSEvent.INVITATION_REPLY_ERROR</em>constant defines the value of the<em>type</em>property of the event object for a<em>invitationReplyError</em>event.
@@ -1538,7 +1539,7 @@ class SFSEvent extends BaseEvent
 	 * @see		#INVITATION_REPLY
 	 * @see		#INVITATION
 	 */
-	public static inline var INVITATION_REPLY_ERROR:String = "invitationReplyError";
+	public static inline var INVITATION_REPLY_ERROR:EventType<SFSEvent> = "invitationReplyError";
 	
 	/**
 	 * The<em>SFSEvent.PROXIMITY_LIST_UPDATE</em>constant defines the value of the<em>type</em>property of the event object for a<em>proximityListUpdate</em>event.
@@ -1586,7 +1587,7 @@ class SFSEvent extends BaseEvent
 	 * 
 	 * @eventType	proximityListUpdate
 	 */
-	public static inline var PROXIMITY_LIST_UPDATE:String = "proximityListUpdate";
+	public static inline var PROXIMITY_LIST_UPDATE:EventType<SFSEvent> = "proximityListUpdate";
 	
 	/**
 	 * The<em>SFSEvent.MMOITEM_VARIABLES_UPDATE</em>constant defines the value of the<em>type</em>property of the event object for a<em>mmoItemVariablesUpdate</em>event.
@@ -1618,7 +1619,7 @@ class SFSEvent extends BaseEvent
 	 * 
 	 * @eventType	mmoItemVariablesUpdate
 	 */ 
-	public static inline var MMOITEM_VARIABLES_UPDATE:String = "mmoItemVariablesUpdate";
+	public static inline var MMOITEM_VARIABLES_UPDATE:EventType<SFSEvent> = "mmoItemVariablesUpdate";
 	
 	/**
 	 * The <em>SFSEvent.CRYPTO_INIT</em> constant defines the value of the <em>type</em> property of the event object for a <em>cryptoInit</em> call.
@@ -1662,7 +1663,7 @@ class SFSEvent extends BaseEvent
 	 * 
 	 * @eventType	cryptoInit
 	 */
-	 public static inline var CRYPTO_INIT:String = "CryptoInit";
+	 public static inline var CRYPTO_INIT:EventType<SFSEvent> = "CryptoInit";
 	
 	
 	//==========================================================================================================

@@ -10,7 +10,7 @@ import com.smartfoxserver.v2.requests.GenericMessageType;
 import com.smartfoxserver.v2.requests.ObjectMessageRequest;
 
 /** @private */
-internal class ProximityObjectMessageRequest extends DynamicMessageRequest
+class ProximityObjectMessageRequest extends DynamicMessageRequest
 {
 	public function ProximityObjectMessageRequest(obj:ISFSObject, targetRoom:Room, aoi:Vec3D)
 	{
@@ -21,7 +21,7 @@ internal class ProximityObjectMessageRequest extends DynamicMessageRequest
 	/** @exclude */ 
 	override public function validate(sfs:SmartFox):Void
 	{
-		var errors:Array<Dynamic>=[];
+		var errors:Array<String>=[];
 			
 		if(_params==null)
 			errors.push("Object message is null!");

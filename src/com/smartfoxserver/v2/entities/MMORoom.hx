@@ -3,7 +3,6 @@ package com.smartfoxserver.v2.entities;
 import com.smartfoxserver.v2.entities.data.Vec3D;
 import com.smartfoxserver.v2.entities.IMMOItem;
 
-import com.smartfoxserver.v2.util.ArrayUtil;
 import haxe.ds.IntMap;
 
 /**

@@ -8,7 +8,7 @@ import openfl.utils.ByteArray;
 /** @private */
 interface IProtocolCodec
 {
-	function onPacketRead(packet:Dynamic):Void;
+	function onPacketRead(packet:ByteArray):Void;
 	function onPacketWrite(message:IMessage):Void;
 
 	public var ioHandler(get, set):IoHandler;

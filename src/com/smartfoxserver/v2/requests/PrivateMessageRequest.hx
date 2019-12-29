@@ -1,6 +1,8 @@
 package com.smartfoxserver.v2.requests;
 
+import com.smartfoxserver.v2.exceptions.SFSValidationError;
 import com.smartfoxserver.v2.entities.data.ISFSObject;
+import com.smartfoxserver.v2.requests.GenericMessageRequest.*;
 
 
 /**
@@ -37,8 +39,11 @@ import com.smartfoxserver.v2.entities.data.ISFSObject;
  * 
  * @see		com.smartfoxserver.v2.SmartFox#event:privateMessage privateMessage event
  */
-class PrivateMessageRequest extends GenericMessageRequest
-{
+class PrivateMessageRequest extends GenericMessageRequest {
+
+	/** @exclude */
+	private var _recipient:Int;
+	
 	/**
 	 * Creates a new<em>PrivateMessageRequest</em>instance.
 	 * The instance must be passed to the<em>SmartFox.send()</em>method for the request to be performed.
@@ -50,13 +55,35 @@ class PrivateMessageRequest extends GenericMessageRequest
 	 * @see		com.smartfoxserver.v2.SmartFox#send()SmartFox.send()
 	 * @see		com.smartfoxserver.v2.entities.data.SFSObject SFSObject
 	 */
-	public function new(message:String, recipientId:Int, params:ISFSObject=null)
-	{
+	public function new(message:String, recipientId:Int, params:ISFSObject = null) {
 		super();
-		
+
 		_type = GenericMessageType.PRIVATE_MSG;
 		_message = message;
 		_recipient = recipientId;
 		_params = params;
 	}
+
+	override public function validate(sfs:SmartFox):Void {
+		var errors:Array<String> = [];
+
+		if (_message == null || _message.length == 0)
+			errors.push("Private message is empty!");
+
+		if (_recipient < 0)
+			errors.push("Invalid recipient id:" + _recipient);
+
+		if (errors.length > 0)
+			throw new SFSValidationError("Request error - ", errors);
+	}
+
+	override public function execute(sfs:SmartFox):Void {
+		_sfso.putByte(KEY_MESSAGE_TYPE, _type);
+		_sfso.putInt(KEY_RECIPIENT, _recipient);
+		_sfso.putUtfString(KEY_MESSAGE, _message);
+
+		if (_params != null)
+			_sfso.putSFSObject(KEY_XTRA_PARAMS, _params);
+	}
+
 }

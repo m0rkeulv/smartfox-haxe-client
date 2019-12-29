@@ -7,11 +7,11 @@ import com.smartfoxserver.v2.kernel;
 import com.smartfoxserver.v2.protocol.IProtocolCodec;
 import com.smartfoxserver.v2.protocol.serialization.DefaultObjectDumpFormatter;
 
-import openfl.utils.ByteArray<Dynamic>;
+import openfl.utils.ByteArray;
 
 class TestProtocolCodec implements IProtocolCodec
 {
-	private var verificationPacket:ByteArray
+	private var verificationPacket:ByteArray;
 	
 	public function new()
 	{
@@ -20,7 +20,7 @@ class TestProtocolCodec implements IProtocolCodec
 	
 	public function onPacketRead(packet:Dynamic):Void
 	{
-		var bytes:ByteArray<Dynamic>=cast(packet, ByteArray);
+		var bytes:ByteArray = cast(packet, ByteArray);
 		if(verifyPacketIntegrity(bytes, verificationPacket))
 			trace("Codec - Packet complete:" + bytes.length)
 		else

@@ -278,11 +278,10 @@ class SFSIOHandler implements IoHandler
 	
 	private function resizeByteArray(array:ByteArray, pos:Int, len:Int):ByteArray
 	{
-		var newArray:ByteArray = new ByteArray();
+		var newArray:ByteArray = new ByteArray(len);
 		newArray.endian = Endian.BIG_ENDIAN;
 		newArray.writeBytes(array, pos, len);
 		newArray.position = 0;
-		
 		return newArray;
 	}
 	

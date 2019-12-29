@@ -86,12 +86,12 @@ class SFSErrorCodes
 	}
 	
 	/** @private */
-	public static function getErrorMessage(code:Int, params:Array<Dynamic>=null):String
+	public static function getErrorMessage(code:Int, params:Array<String>=null):String
 	{
 		return stringFormat(errorsByCode[code], params);
 	}
 	
-	private static function stringFormat(ss:String, params:Array<Dynamic>):String
+	private static function stringFormat(ss:String, params:Array<String>):String
 	{
 		if(ss==null)
 			return "";

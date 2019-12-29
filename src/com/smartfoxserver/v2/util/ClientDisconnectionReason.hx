@@ -38,7 +38,7 @@ class ClientDisconnectionReason
 	public static inline var UNKNOWN:String = "unknown";
 	
 	// Only the idle, kick and ban reasons are required, because they are the only ones sent by the server
-	private static var reasons:Array<Dynamic>=
+	private static var reasons:Array<String>=
 	[
 		"idle",
 		"kick",

@@ -1,16 +1,13 @@
 package com.smartfoxserver.v2.entities;
 import com.smartfoxserver.v2.entities.managers.IRoomManager;
-import com.smartfoxserver.v2.entities.managers.SFSRoomManager;
 import com.smartfoxserver.v2.entities.variables.RoomVariable;
 
 import com.smartfoxserver.v2.entities.data.ISFSArray;
 import com.smartfoxserver.v2.entities.data.Vec3D;
 import com.smartfoxserver.v2.entities.managers.IUserManager;
 import com.smartfoxserver.v2.entities.managers.SFSUserManager;
-import com.smartfoxserver.v2.entities.variables.RoomVariable;
 import com.smartfoxserver.v2.entities.variables.SFSRoomVariable;
 import com.smartfoxserver.v2.exceptions.SFSError;
-import com.smartfoxserver.v2.util.ArrayUtil;
 import haxe.ds.StringMap;
 
 /**

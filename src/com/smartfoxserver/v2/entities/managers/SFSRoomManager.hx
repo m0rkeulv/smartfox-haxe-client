@@ -3,7 +3,6 @@ package com.smartfoxserver.v2.entities.managers;
 import com.smartfoxserver.v2.SmartFox;
 import com.smartfoxserver.v2.entities.Room;
 import com.smartfoxserver.v2.entities.User;
-import com.smartfoxserver.v2.util.ArrayUtil;
 import haxe.ds.IntMap;
 import haxe.ds.StringMap;
 
@@ -147,7 +146,7 @@ class SFSRoomManager implements IRoomManager
 	public function removeGroup(groupId:String):Void
 	{
 		// Remove group
-		ArrayUtil.removeElement(_groups, groupId);
+		_groups.remove(groupId);
 		
 		var roomsInGroup:Array<Room> = getRoomListFromGroup(groupId);
 		

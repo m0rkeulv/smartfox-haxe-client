@@ -7,9 +7,10 @@ import com.smartfoxserver.v2.entities.data.ISFSObject;
 import com.smartfoxserver.v2.entities.data.Vec3D;
 import com.smartfoxserver.v2.exceptions.SFSValidationError;
 import com.smartfoxserver.v2.requests.PublicMessageRequest;
+import com.smartfoxserver.v2.requests.GenericMessageRequest.*;
 
 /** @private */
-internal class ProximityPublicMessageRequest extends PublicMessageRequest
+class ProximityPublicMessageRequest extends PublicMessageRequest
 {
 	public function ProximityPublicMessageRequest(message:String, targetRoom:Room, aoi:Vec3D, params:ISFSObject=null)
 	{
@@ -20,7 +21,7 @@ internal class ProximityPublicMessageRequest extends PublicMessageRequest
 	/** @exclude */ 
 	override public function validate(sfs:SmartFox):Void
 	{
-		var errors:Array<Dynamic>=[]
+		var errors:Array<String>=[];
 			
 		if(_message==null || _message.length==0)
 			errors.push("Public message is empty!")
@@ -38,7 +39,7 @@ internal class ProximityPublicMessageRequest extends PublicMessageRequest
 	/** @exclude */ 
 	override public function execute(sfs:SmartFox):Void
 	{
-		super.execute(sfs);
+		_sfso.putByte(KEY_MESSAGE_TYPE, _type);
 		
 		_aoi.isFloat()? _sfso.putFloatArray(KEY_AOI, _aoi.toArray()):_sfso.putIntArray(KEY_AOI, _aoi.toArray());
 	}

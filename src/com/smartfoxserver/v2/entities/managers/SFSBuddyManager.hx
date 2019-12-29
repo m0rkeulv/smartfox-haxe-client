@@ -9,7 +9,6 @@ import com.smartfoxserver.v2.entities.variables.BuddyVariable;
 import com.smartfoxserver.v2.SmartFox;
 import com.smartfoxserver.v2.entities.variables.ReservedBuddyVariables;
 import com.smartfoxserver.v2.entities.variables.SFSBuddyVariable;
-import com.smartfoxserver.v2.util.ArrayUtil;
 import haxe.ds.StringMap;
 /**
  * The<em>SFSBuddyManager</em>class is the entity in charge of managing the current user's<b>Buddy List</b>system.
@@ -192,7 +191,12 @@ class SFSBuddyManager implements IBuddyManager
 	public var myVariables(get, null):Array<BuddyVariable>;
  	private function get_myVariables():Array<BuddyVariable>
 	{
-		return cast ArrayUtil.objToArray(_myVariables);	
+ 
+		var variables:Array<BuddyVariable> = [];
+		for(uv in _myVariables)
+			variables.push(uv);
+
+		return variables;
 	}
 	
 	/** @inheritDoc */
@@ -244,7 +248,7 @@ class SFSBuddyManager implements IBuddyManager
 	
 	// Replaces all
 	/** @private */
-	public function setMyVariables(variables:Array<Dynamic>):Void
+	public function setMyVariables(variables:Array<BuddyVariable>):Void
 	{
 		for(bVar in variables)
 		{

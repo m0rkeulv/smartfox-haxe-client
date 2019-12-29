@@ -14,13 +14,13 @@ https://github.com/boorik/smartfox-haxe-client
 ----------------------------------
 CURRENTLY WORKING WITH :
 
-haxe: 4.0.3
+haxe: 4.0.5
 
 lime: 7.6.3
 
 openfl: 8.9.5
 
-crypto: 0.3.0 (haxe-crypto has been replaced with HaxeFoundation/crypto)
+crypto: 0.3.0 
 
 
 ----------------------------------
@@ -43,6 +43,8 @@ http://docs2x.smartfoxserver.com/ExamplesFlash/introduction
 
 
 ## Changelog:
+### 0.2.6
+ - attempt to make code stricter typed / use less dynamic
 ### 0.2.5
  - replaced haxe-crypto has been replaced with HaxeFoundation/crypto
  - deleted passwordUtil as MD5 really should not be used.

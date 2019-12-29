@@ -4,7 +4,6 @@ import com.smartfoxserver.v2.entities.variables.BuddyVariable;
 import com.smartfoxserver.v2.entities.data.ISFSArray;
 import com.smartfoxserver.v2.entities.variables.ReservedBuddyVariables;
 import com.smartfoxserver.v2.entities.variables.SFSBuddyVariable;
-import com.smartfoxserver.v2.util.ArrayUtil;
 import haxe.ds.StringMap;
 
 /**

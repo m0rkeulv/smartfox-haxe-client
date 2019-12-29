@@ -352,7 +352,7 @@ class SystemController extends BaseController
 		if(user !=null)
 		{
 			// keep a copy of the rooms joined by this user
-			var joinedRooms:Array<Dynamic> = sfs.roomManager.getUserRooms(user);
+			var joinedRooms = sfs.roomManager.getUserRooms(user);
 
 			// remove from all rooms
 			sfs.roomManager.removeUser(user);
@@ -599,7 +599,7 @@ class SystemController extends BaseController
 		var varListData:ISFSArray = sfso.getSFSArray(SetRoomVariablesRequest.KEY_VAR_LIST);
 		
 		var targetRoom:Room = sfs.roomManager.getRoomById(rId);
-		var changedVarNames:Array<Dynamic> = [];
+		var changedVarNames:Array<String> = [];
 		
 		if(targetRoom !=null)
 		{
@@ -630,7 +630,7 @@ class SystemController extends BaseController
 		var varListData:ISFSArray = sfso.getSFSArray(SetUserVariablesRequest.KEY_VAR_LIST);
 		
 		var user:User = sfs.userManager.getUserById(uId);
-		var changedVarNames:Array<Dynamic> = [];
+		var changedVarNames:Array<String> = [];
 		
 		if(user !=null)
 		{
@@ -1206,7 +1206,7 @@ class SystemController extends BaseController
 			
 			var isItMe:Bool = buddyName == sfs.mySelf.name;
 			
-			var changedVarNames:Array<Dynamic> = [];
+			var changedVarNames:Array<String> = [];
 			var variables:Array<BuddyVariable> = [];
 			
 			var fireEvent:Bool = true;
@@ -1269,7 +1269,7 @@ class SystemController extends BaseController
 		var evtParams:Dynamic = { };
 		
 		var roomListData:ISFSArray = sfso.getSFSArray(FindRoomsRequest.KEY_FILTERED_ROOMS);
-		var roomList:Array<Dynamic> = [];
+		var roomList:Array<Room> = [];
 		
 		for(i in 0...roomListData.size())
 		{
@@ -1294,7 +1294,7 @@ class SystemController extends BaseController
 		var evtParams:Dynamic = { };
 		
 		var userListData:ISFSArray = sfso.getSFSArray(FindUsersRequest.KEY_FILTERED_USERS);
-		var userList:Array<Dynamic> = [];
+		var userList:Array<User> = [];
 		var mySelf:User = sfs.mySelf;
 			
 		for(i in 0...userListData.size())
@@ -1409,18 +1409,18 @@ class SystemController extends BaseController
 		var evtParams:Dynamic = { };
 		
 		var roomId:Int = sfso.getInt(SetUserPositionRequest.KEY_ROOM);	
-		var minusUserList:Array<Dynamic>=sfso.getIntArray(SetUserPositionRequest.KEY_MINUS_USER_LIST);
+		var minusUserList:Array<Int>=sfso.getIntArray(SetUserPositionRequest.KEY_MINUS_USER_LIST);
 		var plusUserList:ISFSArray=sfso.getSFSArray(SetUserPositionRequest.KEY_PLUS_USER_LIST);
 		
-		var minusItemList:Array<Dynamic>=sfso.getIntArray(SetUserPositionRequest.KEY_MINUS_ITEM_LIST);
+		var minusItemList:Array<Int>=sfso.getIntArray(SetUserPositionRequest.KEY_MINUS_ITEM_LIST);
 		var plusItemList:ISFSArray=sfso.getSFSArray(SetUserPositionRequest.KEY_PLUS_ITEM_LIST);
 		
 		var theRoom:Room=sfs.roomManager.getRoomById(roomId);
 		
-		var addedUsers:Array<Dynamic> = [];
-		var removedUsers:Array<Dynamic>=[];
-		var addedItems:Array<Dynamic>=[];
-		var removedItems:Array<Dynamic>=[];
+		var addedUsers:Array<User> = [];
+		var removedUsers:Array<User>=[];
+		var addedItems:Array<IMMOItem>=[];
+		var removedItems:Array<IMMOItem>=[];
 		var i:Int;
 		
 		// Remove users that no longer are in proximity
@@ -1526,7 +1526,7 @@ class SystemController extends BaseController
 		var varList:ISFSArray=sfso.getSFSArray(SetMMOItemVariables.KEY_VAR_LIST);
 		
 		var mmoRoom:MMORoom= cast sfs.getRoomById(roomId);
-		var changedVarNames:Array<Dynamic>=[];
+		var changedVarNames:Array<String>=[];
 			
 		if(mmoRoom !=null)
 		{

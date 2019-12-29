@@ -25,7 +25,7 @@ interface IMMOItem
 	 * @see		com.smartfoxserver.v2.entities.variables.MMOItemVariable MMOItemVariable
 	 * @see		#getVariable()
 	 */ 
-	function getVariables():Array<Dynamic>;
+	function getVariables():Array<IMMOItemVariable>;
 	
 	/**
 	 * Retrieves an MMOItem Variable from its name.
