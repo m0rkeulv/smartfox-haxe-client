@@ -274,7 +274,7 @@ class SFSObject implements ISFSObject
 	{
 		var wrapper:SFSDataWrapper = cast dataHolder[key];
 		if(wrapper !=null)
-			return Std.parseInt(wrapper.data);
+			return wrapper.data;
 		else 
 			return 0; //==0
 	}
