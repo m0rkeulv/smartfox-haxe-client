@@ -1,4 +1,5 @@
 package com.smartfoxserver.v2.entities;
+import haxe.ds.ObjectMap;
 import com.smartfoxserver.v2.entities.managers.IRoomManager;
 import com.smartfoxserver.v2.entities.variables.RoomVariable;
 
@@ -60,7 +61,7 @@ class SFSRoom implements Room
 	private var _variables:StringMap<RoomVariable>;
 	
 	/** @private */
-	private var _properties:Dynamic;
+	private var _properties:ObjectMap<Dynamic,Dynamic>;
 	
 	/** @private */
 	private var _userManager:IUserManager;
@@ -159,7 +160,7 @@ class SFSRoom implements Room
 		_maxUsers  = _maxSpectators = 0;
 		
 		_variables = new StringMap<RoomVariable>();
-		_properties = {};
+		_properties = new ObjectMap<Dynamic,Dynamic>();
 		_userManager = new SFSUserManager(null);	
 	}
 	
@@ -438,14 +439,14 @@ class SFSRoom implements Room
 	}
 	
 	/** @inheritDoc */
-	public var properties(get, set):Dynamic;
- 	private function get_properties():Dynamic
+	public var properties(get, set):ObjectMap<Dynamic,Dynamic>;
+ 	private function get_properties():ObjectMap<Dynamic,Dynamic>
 	{
 		return _properties;
 	}
 	
 	/** @private */
-	private function set_properties(value:Dynamic):Dynamic
+	private function set_properties(value:ObjectMap<Dynamic,Dynamic>):ObjectMap<Dynamic,Dynamic>
 	{
 		return _properties = value;
 	}

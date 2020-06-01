@@ -1,4 +1,5 @@
 package com.smartfoxserver.v2.entities;
+import haxe.ds.ObjectMap;
 import com.smartfoxserver.v2.entities.managers.SFSUserManager;
 import com.smartfoxserver.v2.entities.variables.SFSUserVariable;
 import com.smartfoxserver.v2.entities.variables.UserVariable;
@@ -38,7 +39,7 @@ class SFSUser implements User
 	private var _variables:StringMap<Dynamic>;
 	
 	/** @private */
-	private var _properties:Dynamic;
+	private var _properties:ObjectMap<Dynamic,Dynamic>;
 	
 	/** @private */
 	private var _isModerator:Bool;
@@ -90,7 +91,7 @@ class SFSUser implements User
 		_name = name;
 		_isItMe = isItMe;
 		_variables = new StringMap<Dynamic>();
-		_properties = { };
+		_properties = new ObjectMap<Dynamic ,Dynamic>();
 		_isModerator = false;
 		_playerIdByRoomId = new IntMap<Int>();
 	}
@@ -285,14 +286,14 @@ class SFSUser implements User
 	}
 	
 	/** @inheritDoc */
-	public var properties(get, set):Dynamic;
- 	private function get_properties():Dynamic
+	public var properties(get, set):ObjectMap<Dynamic,Dynamic>;
+ 	private function get_properties():ObjectMap<Dynamic,Dynamic>
 	{
 		return _properties;
 	}
 	
 	/** @private */
-	private function set_properties(value:Dynamic):Dynamic
+	private function set_properties(value:ObjectMap<Dynamic,Dynamic>):ObjectMap<Dynamic,Dynamic>
 	{
 		return _properties = value;	
 	}

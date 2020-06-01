@@ -1,5 +1,6 @@
 package com.smartfoxserver.v2.entities;
 
+import haxe.ds.ObjectMap;
 import com.smartfoxserver.v2.entities.managers.IRoomManager;
 import com.smartfoxserver.v2.entities.variables.RoomVariable;
 
@@ -213,7 +214,7 @@ interface Room
 	 * Defines a generic utility object that can be used to store custom Room data.
 	 * The values added to this object are for client-side use only and are never transmitted to the server or to the other clients.
 	 */
-	var properties(get,set):Dynamic;
+	var properties(get,set):ObjectMap<Dynamic,Dynamic>;
 	
 	/**
 	 * Returns a reference to the Room Manager which manages this Room.

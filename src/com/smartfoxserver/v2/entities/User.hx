@@ -1,5 +1,6 @@
 package com.smartfoxserver.v2.entities;
 
+import haxe.ds.ObjectMap;
 import com.smartfoxserver.v2.entities.data.Vec3D;
 import com.smartfoxserver.v2.entities.managers.IUserManager;
 import com.smartfoxserver.v2.entities.variables.UserVariable;
@@ -249,7 +250,7 @@ interface User
 	 * Defines a generic utility object that can be used to store custom user data.
 	 * The values added to this object are for client-side use only and are never transmitted to the server or to the other clients.
 	 */
-	var properties(get,set):Dynamic;
+	var properties(get,set):ObjectMap<Dynamic,Dynamic>;
 		
 	/**
 	 * Returns the entry point of this user in the current user's AoI.
