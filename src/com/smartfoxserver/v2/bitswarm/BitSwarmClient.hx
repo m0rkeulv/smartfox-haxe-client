@@ -252,7 +252,7 @@ class BitSwarmClient extends EventDispatcher
 		
 		_lastIpAddress = host;
 		_lastTcpPort = port;
-		
+
 		if(_useBlueBox)
 		{
 			_bbClient.pollSpeed=(sfs.config !=null)? sfs.config.blueBoxPollingRate:750;
@@ -294,7 +294,7 @@ class BitSwarmClient extends EventDispatcher
 	
 	
 	
-	public function disconnect(reason:String=null):Void
+	public function disconnect(reason:String=null, fireEvent:Bool = true ):Void
 	{
 		if(_useBlueBox)
 			_bbClient.close();
@@ -303,8 +303,10 @@ class BitSwarmClient extends EventDispatcher
 			if(socket.connected)
 				_socket.close();
 		}
-				
-		onSocketClose(new BitSwarmEvent(BitSwarmEvent.DISCONNECT, { reason:reason } ));
+		if(fireEvent)
+			onSocketClose(new BitSwarmEvent(BitSwarmEvent.DISCONNECT, { reason:reason } ));
+		else
+			_connected = false;
 	}
 	
 	public function nextUdpPacketId():Float

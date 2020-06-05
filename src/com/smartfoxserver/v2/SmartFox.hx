@@ -2201,6 +2201,8 @@ class SmartFox extends EventDispatcher
 		// Socket failed, attempt using the BBox
 		if(_bitSwarm.connectionMode==ConnectionMode.SOCKET && _useBlueBox)
 		{
+			// socket must be closed before switching to bluebox
+			_bitSwarm.disconnect(null, false);  //performace "silent" disconnect
 			_bitSwarm.forceBlueBox(true);
 			var bbPort:Int = config != null ? config.httpPort:DEFAULT_HTTP_PORT;
 				
