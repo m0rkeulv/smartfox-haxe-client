@@ -63,12 +63,14 @@ import com.smartfoxserver.v2.util.BuddyOnlineState;
 import com.smartfoxserver.v2.util.ClientDisconnectionReason;
 import com.smartfoxserver.v2.util.SFSErrorCodes;
 
+typedef SfsRequestHandler = (IMessage)->Void;
+
 /** @private */
 class SystemController extends BaseController
 {
 	private var sfs:SmartFox;
 	private var bitSwarm:BitSwarmClient;
-	private var requestHandlers:Map<Int,Dynamic>;
+	private var requestHandlers:Map<Int,{name:String, handler:SfsRequestHandler}>;
 					
 	public function new(bitSwarm:BitSwarmClient)
 	{
@@ -76,7 +78,7 @@ class SystemController extends BaseController
 		this.bitSwarm = bitSwarm;
 		this.sfs = bitSwarm.sfs;
 		
-		requestHandlers = new Map<Int,Dynamic>();
+		requestHandlers = new Map<Int,{name:String, handler:SfsRequestHandler}>();
 		initRequestHandlers();
 	}
 	
@@ -125,7 +127,9 @@ class SystemController extends BaseController
 	
 	public override function handleMessage(message:IMessage):Void
 	{
-		var command:Dynamic = requestHandlers[message.id];
+		trace("message"+message);
+		trace("message.id"+message.id);
+		var command:{name:String, handler:SfsRequestHandler} = requestHandlers[message.id];
 			
 		if(command !=null)
 		{
