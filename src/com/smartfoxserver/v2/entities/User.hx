@@ -11,7 +11,7 @@ import com.smartfoxserver.v2.entities.variables.UserVariable;
  * 
  * @see 	SFSUser
  */
-interface User
+interface User extends Entity
 {
 	/**
 	 * Indicates the id of this user.

@@ -8,7 +8,7 @@ import com.smartfoxserver.v2.entities.variables.BuddyVariable;
  * 
  * @see 	SFSBuddy
  */
-interface Buddy
+interface Buddy  extends Entity
 {
 	/**
 	 * Indicates the id of this buddy.

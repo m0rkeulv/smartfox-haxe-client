@@ -10,7 +10,7 @@ import com.smartfoxserver.v2.entities.variables.RoomVariable;
  * 
  * @see 	SFSRoom
  */
-interface Room
+interface Room extends Entity
 {
 	/**
 	 * Indicates the id of this Room.
