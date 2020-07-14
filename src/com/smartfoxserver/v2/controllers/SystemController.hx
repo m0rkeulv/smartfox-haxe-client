@@ -127,8 +127,6 @@ class SystemController extends BaseController
 	
 	public override function handleMessage(message:IMessage):Void
 	{
-		trace("message"+message);
-		trace("message.id"+message.id);
 		var command:{name:String, handler:SfsRequestHandler} = requestHandlers[message.id];
 			
 		if(command !=null)
